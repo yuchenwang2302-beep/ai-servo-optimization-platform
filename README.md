@@ -45,3 +45,10 @@ ai-servo-optimization-platform/
 
 - MATLAB must be installed and configured properly
 - Simulink models are required for simulation tasks
+
+## MATLAB Engine Setup
+
+Install MATLAB Engine manually:
+
+cd "MATLAB_ROOT/extern/engines/python"
+python setup.py install
