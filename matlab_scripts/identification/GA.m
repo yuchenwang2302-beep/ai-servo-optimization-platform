@@ -1,4 +1,13 @@
-function [gb, g, gbest] = GA(popsize, dimension, iterM, vref)
+function [gb, g, gbest] = GA(popsize, dimension, iterM, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
     clc; 
     %clear;
     vref=vref;
@@ -102,6 +111,9 @@ function [gb, g, gbest] = GA(popsize, dimension, iterM, vref)
          -2       2;       % k3
          -2       2;       % k4
          -2       2];      % k5
+if ~isempty(parameter_bounds)
+    tL(1:5,:) = parameter_bounds;
+end
     
     bit_length = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
     Gelength = sum(bit_length);
@@ -112,7 +124,7 @@ function [gb, g, gbest] = GA(popsize, dimension, iterM, vref)
     
     % iterM = 200;
     
-    optimal_value = rand*inf;
+    optimal_value = inf;
     BVpos = ones(1,dimension);
     
     pop = round(rand(popsize,Gelength)); %pop 二进制
@@ -199,10 +211,8 @@ function [gb, g, gbest] = GA(popsize, dimension, iterM, vref)
         gbest=optimal_value;
         g=BVpos;
         
-         % 每5次迭代或最后一次迭代时保存数据
-        if mod(iter, 5) == 0 || iter == iterM
-            save(data_file, 'gBV_record', 'iter', 'iterM');
-        end
+         % 每次迭代完成后发布收敛数据
+        servo_save_progress(data_file, gBV_record, iter);
     end
     
     % ER =  ...

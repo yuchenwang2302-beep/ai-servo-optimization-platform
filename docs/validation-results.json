@@ -1,0 +1,79 @@
+{
+  "validated_date": "2026-09-26",
+  "tested_source_commit": "dbcae49aa0d399e107f6a7abe4320fa3b543d337",
+  "platform": "Windows x64",
+  "environment": "Fresh local Git clone and independent project-local Python environment; same physical computer",
+  "matlab_release": "R2024b",
+  "python_version": "3.12.14",
+  "automated_tests": {
+    "passed": 66,
+    "failed": 0
+  },
+  "ui_smoke_checks": {
+    "passed": 2,
+    "failed": 0
+  },
+  "fresh_install_and_startup": {
+    "passed": true
+  },
+  "live_ui": {
+    "passed": true,
+    "progress": [
+      {
+        "iteration": 1,
+        "seconds": 38.5
+      },
+      {
+        "iteration": 2,
+        "seconds": 44.53100000001723
+      },
+      {
+        "iteration": 3,
+        "seconds": 51.578000000008615
+      }
+    ],
+    "states": [
+      "starting",
+      "running",
+      "cleaning",
+      "succeeded"
+    ],
+    "errors": [],
+    "results": [
+      {
+        "matches_ISE": true,
+        "best": 0.00948954376345319,
+        "actual_ISE": 0.009489543763453191
+      }
+    ],
+    "total_seconds": 65.46900000001187,
+    "calculation_seconds": 43.39100000000326
+  },
+  "limitations": [
+    "No second physical computer tested",
+    "No industrial production-load certification",
+    "The release check did not rerun all 16 algorithms",
+    "Initial random seed does not reproduce the complete optimization trajectory; internal simulation RNG use remains unisolated"
+  ],
+  "seeded_example": {
+    "initial_seed": 42,
+    "generator": "twister",
+    "first_objective": 0.014770778797258894,
+    "clean_clone_repeat_objective": 0.014685904449702742,
+    "exact_search_reproducibility": false,
+    "simulation_changes_global_rng_state": true,
+    "reference_parameter_replays": [
+      0.014770778797258894,
+      0.014770778797258894
+    ],
+    "independent_ise_double": 0.014770778797258894,
+    "final_example_check": {
+      "passed": true,
+      "objective": 0.013715017873993908,
+      "independent_ise": 0.013715017873993908,
+      "reference_replay_ise": 0.014770778797258894,
+      "computational_logic_changed": false
+    }
+  },
+  "publication_note": "Original Python application published under GPL-3.0-only; subsequent documentation and license-comment updates do not change application behavior."
+}

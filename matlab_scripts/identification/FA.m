@@ -1,4 +1,13 @@
-function [gb, g, gbest] = FA(N, d, iterM, vref)
+function [gb, g, gbest] = FA(N, d, iterM, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
 
 clc
 % clear
@@ -124,6 +133,9 @@ tL = [1.5e-4 2.5e-4;  % Lq
          -2      2;       % k3
          -2      2;       % k4
          -2      2];      % k5
+if ~isempty(parameter_bounds)
+    tL(1:5,:) = parameter_bounds;
+end
 
 % 初始化种群
 pop = rand(N,d) .* (tL(:,2)' - tL(:,1)') + tL(:,1)';
@@ -169,12 +181,11 @@ for iter = 1:iterM
     % 可以注释掉这个
     alpha = alpha * 0.97;
 
-    % 每5次迭代或最后一次迭代时保存数据
-    if mod(iter, 5) == 0 || iter == iterM
-        save(data_file, 'gBV_record', 'iter', 'iterM');
-    end
+    % 每次迭代完成后发布收敛数据
+    servo_save_progress(data_file, gBV_record, iter);
 
-    gBpos = pop(i,:);
+    [~, best_idx] = min(fitness);
+    gBpos = pop(best_idx,:);
 
     gb=gBV_record;
     gbest=min(fitness);

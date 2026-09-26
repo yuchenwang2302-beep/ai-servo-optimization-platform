@@ -1,4 +1,13 @@
-function [gb, g, gbest] = ia(NP, D, iterM, vref)
+function [gb, g, gbest] = ia(NP, D, iterM, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
     clc; 
     %clear
     % 强制所有输入转为 double
@@ -118,6 +127,9 @@ function [gb, g, gbest] = ia(NP, D, iterM, vref)
          -5,      5;
          -5,      5;
          -5,      5];
+if ~isempty(parameter_bounds)
+    tL(1:5,:) = parameter_bounds;
+end
     
     %% 初始种群
     pop = zeros(D, NP);
@@ -130,6 +142,9 @@ function [gb, g, gbest] = ia(NP, D, iterM, vref)
         aff(np) = -f(pop(:,np));
     end
     
+    [best_aff, best_idx] = max(aff);
+    best_pos = pop(:,best_idx);
+
     % 在循环之前添加数据文件初始化
     data_file = 'ia_temp_data.mat';
     if exist(data_file, 'file')
@@ -206,14 +221,16 @@ function [gb, g, gbest] = ia(NP, D, iterM, vref)
         aff = aff_all(idx(1:NP));
     
         %% 记录最优值
-        best_pos = pop(:,1);
-        % gBV_record(gen) = -aff(1);
-        gBV_record = [gBV_record,-aff(1)];
-
-         % 每5次迭代或最后一次迭代时保存数据
-        if mod(iter, 5) == 0 || iter == iterM
-            save(data_file, 'gBV_record', 'iter', 'iterM');
+        [candidate_aff, best_idx] = max(aff);
+        if candidate_aff > best_aff
+            best_aff = candidate_aff;
+            best_pos = pop(:,best_idx);
         end
+        % gBV_record(gen) = -aff(1);
+        gBV_record = [gBV_record,-best_aff];
+
+         % 每次迭代完成后发布收敛数据
+        servo_save_progress(data_file, gBV_record, iter);
 
         gb=gBV_record
         gbest=gBV_record(end)

@@ -1,4 +1,13 @@
-function [gb, g, gbest] = HPSO(N1, d, iterM, vref)
+function [gb, g, gbest] = HPSO(N1, d, iterM, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
     clc; 
     %clear
     % 强制所有输入转为 double
@@ -116,6 +125,11 @@ function [gb, g, gbest] = HPSO(N1, d, iterM, vref)
     t3L = [0.3, 0.4];       %R
     t4L = [0.006, 0.007];   %psi_f
     t5L = [5e-5,1e-4];      %B
+if ~isempty(parameter_bounds)
+    t1L = parameter_bounds(1,:); t2L = parameter_bounds(2,:);
+    t3L = parameter_bounds(3,:); t4L = parameter_bounds(4,:);
+    t5L = parameter_bounds(5,:);
+end
     % 误差补偿项 范围
     t6L = [-2, 2];
     t7L = [-2, 2];
@@ -290,9 +304,7 @@ function [gb, g, gbest] = HPSO(N1, d, iterM, vref)
         % gBV_record(iter) = gBV;         % 记录本次最优值
         gBV_record = [gBV_record;gBV];
 
-        if mod(iter, 5) == 0 || iter == iterM
-            save(data_file, 'gBV_record', 'iter', 'iterM');
-        end
+        servo_save_progress(data_file, gBV_record, iter);
 
         gb=gBV_record;
         gbest=gBV;
@@ -304,7 +316,7 @@ function [gb, g, gbest] = HPSO(N1, d, iterM, vref)
         % title('HPSO Optimization Progress');
         % grid on; drawnow;
 
-        % 每5次迭代或最后一次迭代时保存数据
+        % 每次迭代完成后发布收敛数据
 
     end
     

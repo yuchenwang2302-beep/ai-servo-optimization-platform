@@ -1,4 +1,13 @@
-function [gb, g, gbest] = pso2(N, D, T, vref)
+function [gb, g, gbest] = pso2(N, D, T, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
 clc
 %clear
 % 强制所有输入转为 double
@@ -126,6 +135,11 @@ t2L = [1.5e-4, 2.5e-4]; %Ld轴电感范围
 t3L = [0.3, 0.4];       %电阻范围
 t4L = [0.006, 0.007];   %磁链范围
 t5L = [5e-5,1e-4];            %转动惯量范围
+if ~isempty(parameter_bounds)
+    t1L = parameter_bounds(1,:); t2L = parameter_bounds(2,:);
+    t3L = parameter_bounds(3,:); t4L = parameter_bounds(4,:);
+    t5L = parameter_bounds(5,:);
+end
 % t1L = [0, 0.1]; %Lq
 % t2L = [0, 0.1]; %Ld
 % t3L = [0, 1];       %R
@@ -226,7 +240,7 @@ for iter = 1:interM
 
         r1 = rand(1,d);
         r2 = rand(1,d);
-        omega = omega_max - (omega_max-omega_min)*i/interM;%N1;
+        omega = omega_max - (omega_max-omega_min)*iter/interM;
         % v(i,:) = v(i,:) * omega + c1*r1.*(pBpos(i,:)-pop(i,:)) + c2*r2.*(gBpos - pop(i,:));
         v(i,:) = double(v(i,:)) * omega + c1 * r1 .* (pBpos(i,:) - pop(i,:)) + c2 * r2 .* (gBpos - pop(i,:));
         pop(i,:) = abs(pop(i,:)+v(i,:));
@@ -298,19 +312,16 @@ for iter = 1:interM
             pop(i,10) = t10L(1) + (t10L(2) - t10L(1)) * rand;
         end
 
-        % % 每5次迭代或最后一次迭代时保存数据
+        % % 每次迭代完成后发布收敛数据
         % if mod(iter, 5) == 0 || iter == interM
         %     save(data_file, 'gBV_record', 'iter', 'interM');
         % end
     end
     % gBV_record(iter) = gBV;  % 记录当前迭代的最优目标函数值
     
-    % 每5次迭代或最后一次迭代时保存数据
-    if mod(iter, 5) == 0 || iter == interM
-        save(data_file, 'gBV_record', 'iter', 'interM');
-    end
-    
+    % 每次迭代完成后发布收敛数据
     gBV_record=[gBV_record;gBV];
+    servo_save_progress(data_file, gBV_record, iter);
     % 保存每一代的全局最优值
 
     % % 每10次迭代或最后一次迭代时保存数据

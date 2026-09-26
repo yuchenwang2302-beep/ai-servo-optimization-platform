@@ -1,4 +1,5 @@
-function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, interM)
+function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, interM, objective)
+    if nargin < 4, objective = 'ITSE'; end
     clc;   % clear;
     
     % % 粒子群参数
@@ -14,8 +15,7 @@ function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, inte
     c1 = 1.5; c2 = 1.5;
     omega_max = 0.9; omega_min = 0.4;
     
-    lb = [1, 2.7837e+3, 0.867, 17.2799, 0.1, 1e-4, 1e-9, 10, 10, 10, 50];
-    ub = [5, 1.0398e+4, 5, 100, 3, 0.1, 1e-3, 30, 50, 80, 500];
+    [lb, ub] = servo_search_bounds('standard');
     
     % 初始种群和速度
     pop = repmat(lb, N1, 1) + rand(N1, d) .* (repmat(ub - lb, N1, 1));
@@ -45,7 +45,7 @@ function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, inte
     
     % 目标函数
     T = 0.5;
-    f = @(x) fun_position(x, T);
+    f = @(x) fun_position(x, T, objective);
 
     % 在循环之前添加数据文件初始化
     data_file = 'pso_temp_data.mat';
@@ -59,7 +59,7 @@ function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, inte
     
         % 并行适应度计算
         for i = 1:N1
-            val = f(pop(i,:));
+            % Evaluate each candidate once.
             % f_value(i) = 0.3*abs(val(1)) + 0.4*abs(val(2)) + 0.3*abs(val(3));  % 可根据需要加权
            f_value(i) = f(pop(i,:));
     
@@ -96,10 +96,8 @@ function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, inte
         %     pause(0.01);
         % end
 
-        % 每5次迭代或最后一次迭代时保存数据
-        if mod(iter, 5) == 0 || iter == interM
-            save(data_file, 'gBV_record', 'iter', 'interM');
-        end
+        % 每次迭代完成后发布收敛数据
+        servo_save_progress(data_file, gBV_record, iter);
     end
     
     % fprintf('optimal_value is %.6f\\n', gBV);
@@ -115,39 +113,6 @@ function [gBV, gBpos, time, reference0, position] = pso_optimization(N1, d, inte
     % 
     % save('gBV_record_data_parallelITSE.mat', 'gBV_record');
     % run Data.m
-    
-    PI_params.Kp_i = g(1);
-    PI_params.Ki_i = g(2);
-    PI_params.Kp_id = g(1);
-    PI_params.Ki_id = g(2);
-    PI_params.Kp_speed = g(3);
-    PI_params.Ki_speed = g(4);
-    PI_params.Kp_PosCtrl = g(5);
-    FF.k1 = g(6);
-    FF.k2 = g(7);
-    jerk.k1 = g(8);% [10 500]
-    jerk.k2 = g(9);% [10 500]
-    jerk.k3 = g(10);%[10 500]
-    jerk.k4 = g(11);
-    mdlName = 'Jerk_FF_Step_2023';
-    load_system(mdlName);
-    cs = getActiveConfigSet(mdlName);
-    model_cs = cs.copy;
-    simOut = sim(mdlName, model_cs);
-    time=simOut.Pos_Fb_PU.time;
-    reference0 = simOut.Ref_Step_PU0.signals.values;
-    reference1 = simOut.Ref_Step_PU1.signals.values;
-    position = simOut.Pos_Fb_PU.signals.values;
-    % figure
-    % plot(time,reference0,'r')
-    % hold on
-    % plot(time,reference1,'b')
-    % hold on
-    % plot(time,position,'g')
-    % % 提取红色线（reference0）和绿色线（position）对应的时间和数值
-    % time = simOut.Pos_Fb_PU.time;
-    % reference0 = simOut.Ref_Step_PU0.signals.values;
-    % position = simOut.Pos_Fb_PU.signals.values;
-    % 
-    % % 保存为 .mat 文件
-    % save('ref0_position_onlyITSE.mat', 'time', 'reference0', 'position');
+
+    [~, time, reference0, position] = fun_position(gBpos, T, objective);
+end

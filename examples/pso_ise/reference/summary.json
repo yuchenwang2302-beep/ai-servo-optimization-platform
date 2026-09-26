@@ -1,0 +1,42 @@
+{
+  "algorithm": "PSO",
+  "objective": "ISE",
+  "population": 2,
+  "dimensions": 11,
+  "iterations": 3,
+  "seed": 42,
+  "generator": "twister",
+  "matlab_release": "2024b",
+  "objective_value": 0.014770778797258894,
+  "independent_ise": 0.0147707788,
+  "compute_seconds": 38.5204141,
+  "convergence": [
+    0.014770778797258894,
+    0.014770778797258894,
+    0.014770778797258894
+  ],
+  "best_parameters": [
+    4.802857225639665,
+    7342.065296221495,
+    1.5117253525495256,
+    88.93007739611721,
+    2.153410475608532,
+    0.09699399423098323,
+    0.00021233989833916548,
+    13.668090197068675,
+    30.990257265289515,
+    30.386039813862933,
+    112.77223729341883
+  ],
+  "tracking_sample_stride": 10,
+  "recorded_date": "2026-09-26",
+  "source_sha256": {
+    "matlab_scripts/optimization/single_objective/pso_optimization.m": "fe7ebf10beb2cbc978c52e0cd8bc79480c19bc288c6ff4014f10815059d2e721",
+    "matlab_scripts/optimization/single_objective/Jerk_FF_Step_2023.slx": "2462a1070bcd954b596d90a4933216c84f69884044f3b9b7b1101b2426ce13f8",
+    "matlab_scripts/optimization/common/simulate_servo_position.m": "d9ea38134447c62587a0d8a9a2d4dff39b5396f2d88c129a825df9d52325eafd",
+    "matlab_scripts/optimization/common/servo_search_bounds.m": "e5c1b1f120924328dafbfd818f02645daf015b1bc0fbaa5708ecac72e7a8ca2e",
+    "matlab_scripts/optimization/single_objective/servo_error_metric.m": "0d446d5fffbfa6b6447de4b8f066618881cecc473a04a0f4c6d06f71d9afd91e",
+    "matlab_scripts/optimization/single_objective/fun_position.m": "46db33a6b01c3c196ed3ca44551618163344fe6e6fcf223d2d2006eeade7bcb5"
+  },
+  "source_hash_convention": "SHA-256; text uses LF line endings, SLX files use original bytes"
+}

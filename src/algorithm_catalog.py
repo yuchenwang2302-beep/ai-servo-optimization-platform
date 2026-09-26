@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2025-2026 Yuchen Wang
+# SPDX-License-Identifier: GPL-3.0-only
+"""Algorithm names, MATLAB entry points, file names and original UI defaults."""
+
+IDENTIFICATION = {'PSO': 'pso2', 'GA': 'GA', 'DE': 'de', 'IA': 'ia', 'FA': 'FA', 'HPSO': 'HPSO'}
+SINGLE = {'PSO': 'pso_optimization', 'GA': 'GA_optimization', 'DE': 'DE_optimization',
+          'IA': 'ia_optimization', 'FA': 'FA_optimization', 'HPSO': 'HPSO_optimization'}
+MULTI = ('MOGOA', 'NONMOGOA', 'LVMOGOA', 'MDF_MOGOA')
+OBJECTIVES = ('ITSE', 'ISE', 'IAE', 'ITAE')
+
+IDENTIFICATION_RANGES = {
+    'Lq轴电感范围(t1L)': '[1.5e-4, 2.5e-4]',
+    'Ld轴电感范围(t2L)': '[1.5e-4, 2.5e-4]',
+    '电阻范围(t3L)': '[0.3, 0.4]',
+    '磁链范围(t4L)': '[0.006, 0.007]',
+    '机械参数范围(t5L)': '[5e-5,1e-4]',
+}
+
+
+def default_parameters(algorithm, optimization=False):
+    """Return a fresh ordered mapping; values match the pre-cleanup forms."""
+    if not algorithm:
+        return {}
+    if optimization and algorithm in MULTI:
+        return {'种群大小 (N)': '100' if algorithm == 'MDF_MOGOA' else '50',
+                '存档大小 (ArchiveMaxSize)': '150', '最大迭代次数 (T)': '20',
+                '参数维度 (dim)': '11', '目标函数数量 (obj_no)': '3'}
+    if optimization:
+        if algorithm not in SINGLE:
+            raise ValueError(f'Unknown optimization algorithm: {algorithm}')
+        return {'群体粒子个数 (N)': '20' if algorithm == 'FA' else '50',
+                '粒子维数 (D)': '11', '最大迭代次数 (T)': '50'}
+    populations = {'PSO': '100', 'GA': '40', 'DE': '100', 'IA': '100', 'FA': '50', 'HPSO': '50'}
+    return {'群体粒子个数 (N)': populations[algorithm], '粒子维数 (D)': '10',
+            '最大迭代次数 (T)': '200', '速度 (vref)': '3200' if algorithm in ('GA', 'FA') else '200',
+            **IDENTIFICATION_RANGES}
+
+
+def data_filename(algorithm, optimization=False):
+    prefix = {'PSO': 'pso', 'IA': 'ia'}.get(algorithm, algorithm)
+    if algorithm == 'GA' and optimization:
+        prefix = 'ga'
+    elif algorithm == 'DE' and not optimization:
+        prefix = 'de'
+    return prefix + '_temp_data.mat'

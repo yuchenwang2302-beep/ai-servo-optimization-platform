@@ -1,4 +1,13 @@
-function [gb, g, gBV] = de(N, D, iterM, vref)
+function [gb, g, gBV] = de(N, D, iterM, vref, parameter_bounds)
+
+% Optional UI ranges; legacy four-argument calls keep the original defaults.
+if nargin < 5
+    parameter_bounds = [];
+end
+if ~isempty(parameter_bounds)
+    validateattributes(parameter_bounds, {'numeric'}, {'size', [5 2], 'finite', 'positive'});
+    assert(all(parameter_bounds(:,1) < parameter_bounds(:,2)), 'Invalid identification ranges.');
+end
 clc; % clear;
 % vref=200;
 
@@ -110,6 +119,10 @@ CR = 0.9;       % 交叉概率
 
 lb = [1.5e-4, 1.5e-4, 0.3, 0.006, 5e-5, -5, -5, -5, -5, -5];
 ub = [2.5e-4, 2.5e-4, 0.4, 0.007, 1e-4,  5,  5,  5,  5,  5];
+if ~isempty(parameter_bounds)
+    lb(1:5) = parameter_bounds(:,1)';
+    ub(1:5) = parameter_bounds(:,2)';
+end
 
 
 %% 初始化种群 %%
@@ -172,6 +185,7 @@ for j = 1:D
     end
 end
 
+        vi = max(min(vi, ub), lb);
         % 交叉操作
         g = pop(i,:);
         jrand = randi(D);
@@ -204,6 +218,7 @@ end
     [gBV, best_idx] = min(fitness);
     gBV_record = [gBV_record;gBV];
     gb = gBV_record;
+    g = pop(best_idx,:);
     
     % % 每隔 refresh_interval 代更新图像（或首代和末代）
     % if mod(gen, refresh_interval) == 0 || gen == 1 || gen == T
@@ -212,10 +227,8 @@ end
     %      pause(0.01); 
     % end
 
-    % 每5次迭代或最后一次迭代时保存数据
-    if mod(iter, 5) == 0 || iter == iterM
-        save(data_file, 'gBV_record', 'iter', 'iterM');
-    end
+    % 每次迭代完成后发布收敛数据
+    servo_save_progress(data_file, gBV_record, iter);
 
     % fprintf('第 %d 代 最优值 = %.6f\n', gen, gBV);
 
@@ -239,4 +252,3 @@ end
 % title('差分进化（DE）收敛曲线'); grid on;
 % % 保存当前算法的收敛数据
 % save('best_history_de.mat', 'gb');         % 保存最优值记录
-    

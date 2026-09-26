@@ -11,6 +11,8 @@ __pycache__/
 # Virtual Environment
 # =========================
 .venv/
+.python/
+.tools/
 venv/
 env/
 
@@ -80,3 +82,10 @@ dist/
 *.bak
 *.tmp
 *.swp
+
+# Local credentials and machine-specific license files
+.env
+.env.*
+!.env.example
+*.lic
+license*.dat

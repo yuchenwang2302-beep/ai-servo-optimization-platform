@@ -1,4 +1,5 @@
-function [gBV, gBpos, time, reference0, position] = FA_optimization(NP, d, iterM)  
+function [gBV, gBpos, time, reference0, position] = FA_optimization(NP, d, iterM, objective)
+    if nargin < 4, objective = 'ITSE'; end
     clc; % clear;
     % vref = 3200;
     T = 0.5;
@@ -16,15 +17,14 @@ function [gBV, gBpos, time, reference0, position] = FA_optimization(NP, d, iterM
     alpha = 0.1;   % 步长
     
     % 参数边界
-    lb = [1, 2.7837e+3, 0.867, 17.2799, 0.1, 1e-4, 1e-9, 10, 10, 10, 50]; 
-    ub = [5, 1.0398e+4, 5, 100, 3, 0.1, 1e-3, 30, 50, 80, 500];
+    [lb, ub] = servo_search_bounds('standard');
     
-    f = @(x) fun_position(x, T);
+    f = @(x) fun_position(x, T, objective);
     
     
     function val = try_fallback(x, T)
         try
-            val = fun_position(x, T);
+            val = fun_position(x, T, objective);
         catch
             warning('仿真失败，返回 inf');
             val = inf;
@@ -76,10 +76,8 @@ function [gBV, gBpos, time, reference0, position] = FA_optimization(NP, d, iterM
         %     grid on; drawnow;
         % end
 
-        % 每5次迭代或最后一次迭代时保存数据
-        if mod(iter, 5) == 0 || iter == iterM
-            save(data_file, 'gBV_record', 'iter', 'iterM');
-        end
+        % 每次迭代完成后发布收敛数据
+        servo_save_progress(data_file, gBV_record, iter);
     
         alpha = alpha * 0.97;  % 步长衰减
     end
@@ -92,27 +90,6 @@ function [gBV, gBpos, time, reference0, position] = FA_optimization(NP, d, iterM
     
     % 仿真阶段
     g = gBpos;
-    run Data.m
-    PI_params.Kp_i = g(1); PI_params.Ki_i = g(2);
-    PI_params.Kp_id = g(1); PI_params.Ki_id = g(2);
-    PI_params.Kp_speed = g(3); PI_params.Ki_speed = g(4);
-    PI_params.Kp_PosCtrl = g(5);
-    FF.k1 = g(6); FF.k2 = g(7);
-    jerk.k1 = g(8); jerk.k2 = g(9); jerk.k3 = g(10); jerk.k4 = g(11);
-    
-    mdlName = 'Jerk_FF_Step_2023';
-    load_system(mdlName);
-    cs = getActiveConfigSet(mdlName); model_cs = cs.copy;
-    simOut = sim(mdlName, model_cs);
-    
-    time = simOut.Pos_Fb_PU.time;
-    reference0 = simOut.Ref_Step_PU0.signals.values;
-    position = simOut.Pos_Fb_PU.signals.values;
-    % save('ref0_position_only_faITSE.mat', 'time', 'reference0', 'position');
-    % 
-    % figure;
-    % plot(time, reference0, 'r'); hold on;
-    % plot(time, position, 'g');
-    % legend('Reference', 'Position');
-    % title('Position Tracking (FA)');
+
+    [~, time, reference0, position] = fun_position(gBpos, T, objective);
 end

@@ -1,0 +1,110 @@
+{
+  "source_project": "Original local PyQTproject3",
+  "files": [
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/distance.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/distance.m",
+      "original_sha256": "6eb0e871837be51754a6e4bbc10ba16b11106cede110a094a4bad582ce40e23f"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/dominates.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/dominates.m",
+      "original_sha256": "aca70e4479e23ffcfaf49dc136a20c1f6189698bf7febd92c9c09cd7036dd831"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/HandleFullArchive.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/HandleFullArchive.m",
+      "original_sha256": "f818848151f74b937abdbb2376501a65ca0b9f098a5ea81a8a65fa3a2f29077a"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/initialization.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/initialization.m",
+      "original_sha256": "b7d51c35a0342be6cef0ca0259658ff0d8c3aa67f4f259d42a5b0b6cf91567aa"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/RankingProcess.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/RankingProcess.m",
+      "original_sha256": "f2994e7d01e2adcac72c92e24d972f3b817d7c47748e6a0173347e57b50741be"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/RouletteWheelSelection.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/RouletteWheelSelection.m",
+      "original_sha256": "bb6c4e7a4b4d77c12d94910a55c43762e7bbf8319f1e5788aeab3eeb408026c0"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/S_func.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/S_func.m",
+      "original_sha256": "e8c81f2d025ffce9a9b0ee0b19ac22e28b38a623b2d6ea7f51077b507fb3a5b1"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/UpdateArchive.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/UpdateArchive.m",
+      "original_sha256": "4eeca310452f426836b7d7e9d4d92a00504e9c991c3e4e7607616e3e70dfb73d"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/T_Jerk_FF_Step_2023_2.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/T_Jerk_FF_Step_2023_2.m",
+      "original_sha256": "6344f93920295841516be08d3d3e6d78eb86a2f40de611b1667964987496c093"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/eva/GetOptimum.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/GetOptimum.m",
+      "original_sha256": "2e521f77b527dabbf0399b31292dc67e2cf2fee5c29997651c82bb0fb590b352"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/eva/myDeltaP.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/myDeltaP.m",
+      "original_sha256": "50d6c9ab65dcd79f419134cd37ef2c5062471b94db744c958842ca538be9026d"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/eva/myDM.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/myDM.m",
+      "original_sha256": "5298a9627b3fda291f18c0dee3bef7317c18e08558af3c3fcd295b3f6f8f87a6"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/eva/myHV.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/myHV.m",
+      "original_sha256": "ed51c43ccc4f352f220ef934aed7c997f1b8d6c23aaeb90a75a67313327bec93"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/eva/myIGD.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/myIGD.m",
+      "original_sha256": "f66855ecdc7349b2b624e8ee497f2ca6c773431eb578a922ee60627496c2b810"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/MOGOA/Jerk_FF_Step_2023_2.slx",
+      "destination": "matlab_scripts/optimization/multi_objectives/Jerk_FF_Step_2023_2.slx",
+      "original_sha256": "5fecd650b9287b99cae7ef47257ccc50fbb87174055504ba3ec819717379ee74"
+    },
+    {
+      "source": "matlab_scripts/optimization/fun_position_2.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/fun_position_2.m",
+      "original_sha256": "1dbdf99a948bdb6630c5926fcb7cd6976485ba0568da77fe413225d1aaf3e198"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/LFMOGOA/LevyFlight.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/LevyFlight.m",
+      "original_sha256": "d6ebda0e2a0f278cd106ae231586f3577ca2c0cdddcc06aa6cfe3510d6c68297"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/LFMOGOA/initializationWithLevy.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/initializationWithLevy.m",
+      "original_sha256": "54de758b68fa515736069fb2a2d76c9282d867599e5bf683df96eb3fa0c51ecd"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/newMOGOA/enhanced_gradient.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/enhanced_gradient.m",
+      "original_sha256": "dafbc7db0e7148925f807a8f0a078261da788b611a496be93dbcfaf3f546746e"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/MOGOA_lrh/MOGOA/newMOGOA/adaptive_mutation.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/adaptive_mutation.m",
+      "original_sha256": "e810db6589d4bd843f2848c881c37c0e60fb14b6d9971972c4d82c53c0131c24"
+    },
+    {
+      "source": "matlab_scripts/optimization/test/E5 (2)(1)/E5/算法/算法/PlatEMO-4.7/PlatEMO/Algorithms/Utility functions/UniformPoint.m",
+      "destination": "matlab_scripts/optimization/multi_objectives/support/UniformPoint.m",
+      "original_sha256": "8251a44e8655a8d62636991258c055536b2df0ac3320652e2b4d178f28fd4e93"
+    }
+  ]
+}

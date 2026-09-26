@@ -37,9 +37,9 @@ obj_no = double(obj_no);
 % rng(0)
 % Change these details with respect to your problem%%%%%%%%%%%%%%
 ObjectiveFunction=@fun_position_2;
+parallel_workers = servo_parallel_workers(N);
 % dim=11;
-lb = [1, 2.7837e+3,  0.867,  17.2799, 0.1,     1e-4,   1e-9,  10, 10,  10,  50];
-ub = [5,      1.0398e+4, 5, 100,   3,       0.1,   1e-3, 30, 50, 80, 500];
+[lb, ub] = servo_search_bounds('standard');
 % obj_no=3;
 
 if size(ub,2)==1
@@ -90,7 +90,7 @@ end
 
 tic
 for iter=1:iterM
-    parfor i = 1:N
+    parfor (i = 1:N, parallel_workers)
         % 确保草蜢的位置在边界内
         Flag4ub = GrassHopperPositions(:, i) > ub';
         Flag4lb = GrassHopperPositions(:, i) < lb';
@@ -111,6 +111,9 @@ for iter=1:iterM
 
     [Archive_X, Archive_F, Archive_member_no]=UpdateArchive(Archive_X, Archive_F, GrassHopperPositions, GrassHopperFitness, Archive_member_no);
 
+    if Archive_member_no == 0
+        error('Servo:NoFeasibleSolution', 'No feasible solution was found. Increase population/iterations or review the motor response constraints.');
+    end
     if Archive_member_no>ArchiveMaxSize
         Archive_mem_ranks=RankingProcess(Archive_F, ArchiveMaxSize, obj_no);
         [Archive_X, Archive_F, Archive_mem_ranks, Archive_member_no]=HandleFullArchive(Archive_X, Archive_F, Archive_member_no, Archive_mem_ranks, ArchiveMaxSize);
@@ -153,7 +156,7 @@ for iter=1:iterM
         end
 
         X_new=c*S_i_total'+(TargetPosition)'; % Eq. (3.7) in the paper
-        GrassHopperPositions_temp(i,:)=X_new';
+        GrassHopperPositions_temp(i,:)=X_new(:)';
     end
     % GrassHopperPositions
     GrassHopperPositions=GrassHopperPositions_temp';
@@ -167,11 +170,9 @@ for iter=1:iterM
     % disp(['At the iteration ', num2str(iter), ' there are ', num2str(Archive_member_no), ' non-dominated solutions in the archive']);
     % disp(['IGD: ', num2str(IGD_values(iter)), ' HV: ', num2str(HV_values(iter))]);
 
-    % 每5次迭代或最后一次迭代时保存数据
+    % 每次迭代完成后发布收敛数据
     gBV_record = HV_values;
-    if mod(iter, 5) == 0 || iter == iterM
-        save(data_file, 'gBV_record', 'iter');
-    end
+    servo_save_progress(data_file, gBV_record, iter);
 end
 
 
@@ -183,14 +184,14 @@ end
 f_matrix=Archive_F;
 original_indices = (1:size(f_matrix, 1))';
 % 找到包含 inf 的行
-inf_rows = any(isinf(f_matrix), 2);
+inf_rows = any(~isfinite(f_matrix), 2);
 % 去除包含 inf 的行，并保留有效行的索引
 filtered_f_matrix = f_matrix(~inf_rows, :);
 filtered_indices = original_indices(~inf_rows);
 % 标准化决策矩阵 (基于最小值)
 min_values = min(filtered_f_matrix);
 max_values = max(filtered_f_matrix);
-f_matrix_norm = (max_values - filtered_f_matrix) ./ (max_values - min_values);
+f_matrix_norm = (max_values - filtered_f_matrix) ./ max(max_values - min_values, eps);
 % 定义权重向量 (根据实际优先级调整)
 % weights = [10, 10, 0.1, 1, 0.2, 0.2];
 weights = [0.5,0.4,0.1];
@@ -204,7 +205,7 @@ negative_ideal_solution = min(weighted_matrix); % 反理想解是所有列的最
 distance_to_ideal = sqrt(sum((weighted_matrix - ideal_solution).^2, 2));
 distance_to_negative_ideal = sqrt(sum((weighted_matrix - negative_ideal_solution).^2, 2));
 % 计算相对接近度
-relative_closeness = distance_to_negative_ideal ./ (distance_to_ideal + distance_to_negative_ideal);
+relative_closeness = distance_to_negative_ideal ./ max(distance_to_ideal + distance_to_negative_ideal, eps);
 % 找到相对接近度最大的解
 [~, best_solution_index] = max(relative_closeness);
 % 找到最佳解在原始矩阵中的索引
