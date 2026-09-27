@@ -230,7 +230,7 @@ diagnostics.final_archive_parameters = Archive_X;
 diagnostics.selection = struct('rule', 'minmax-weighted-closeness', ...
     'weights', weights, 'selected_index', best_solution_original_index, ...
     'selected_parameters', g, 'selected_objectives', best_solution);
-servo_save_progress(data_file, gBV_record, max_iter, diagnostics);
+servo_save_progress(data_file, gBV_record, iterM, diagnostics);
 
 
 
