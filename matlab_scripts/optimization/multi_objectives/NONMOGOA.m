@@ -71,6 +71,7 @@ elapsed_time=zeros(1, iterM);
 cc=zeros(1,iterM);
 
 % 在循环之前添加数据文件初始化
+archive_history = cell(1, iterM);
 data_file = 'NONMOGOA_temp_data.mat';
 if exist(data_file, 'file')
     delete(data_file);
@@ -161,7 +162,7 @@ for iter = 1:iterM
     toc
     elapsed_time(iter) = toc;
     IGD_values(iter) = myIGD(Archive_F, optimum);  % 使用 PlatEMO 的 IGD 计算方法
-    HV_values(iter) = myHV(Archive_F, optimum);    % 使用 PlatEMO 的 HV 计算方法
+    [HV_values(iter), hv_settings] = servo_hypervolume(Archive_F);
     DM_values(iter) = myDM(Archive_F, optimum);    % 使用 PlatEMO 的 HV 计算方法
     Deltap_values(iter) = myDeltaP(Archive_F,optimum);
     
@@ -170,7 +171,10 @@ for iter = 1:iterM
     
     % 每次迭代完成后发布收敛数据
     gBV_record = HV_values;
-    servo_save_progress(data_file, gBV_record, iter);
+    archive_history{iter} = Archive_F;
+    diagnostics = struct('archive_objectives', {archive_history(1:iter)}, ...
+        'hv', hv_settings);
+    servo_save_progress(data_file, gBV_record, iter, diagnostics);
 
 end
 
@@ -216,6 +220,13 @@ best_solution_original_index = filtered_indices(best_solution_index);
 best_solution = f_matrix(best_solution_original_index, :);
 % disp(['最佳解的指标值为: ', num2str(best_solution)]);
 g=Archive_X(best_solution_original_index,:);
+% Retain the archive and the existing decision rule with the final progress record.
+diagnostics.final_archive_parameters = Archive_X;
+diagnostics.selection = struct('rule', 'minmax-weighted-closeness', ...
+    'weights', weights, 'selected_index', best_solution_original_index, ...
+    'selected_parameters', g, 'selected_objectives', best_solution);
+servo_save_progress(data_file, gBV_record, max_iter, diagnostics);
+
 
 
 

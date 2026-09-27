@@ -7,6 +7,7 @@ from pathlib import Path
 import copy
 import importlib
 import io
+import json
 import os
 import threading
 import time
@@ -53,6 +54,7 @@ class EngineTask(QThread):
         while not future.done():
             if self._stop.is_set():
                 accepted = future.cancel()
+                self._record_lifecycle(cancellation_accepted=bool(accepted), cancellation_during_startup=startup)
                 if startup and not accepted and future.done():
                     return future.result()
                 raise RunCancelled()
@@ -61,6 +63,15 @@ class EngineTask(QThread):
                 raise RuntimeError(tr('MATLAB 启动超过 3 分钟，请先打开 MATLAB 检查登录授权后重试。'))
             self._stop.wait(.1)
         return future.result()
+
+    def _record_lifecycle(self, **details):
+        self._lifecycle = getattr(self, '_lifecycle', {})
+        self._lifecycle.update(details)
+        try:
+            path = Path(self.data_folder) / 'engine_lifecycle.json'
+            path.write_text(json.dumps(self._lifecycle, indent=2), encoding='utf-8')
+        except OSError:
+            pass
 
     def _call(self, eng, function, *args, nargout):
         return self._wait(getattr(eng, function)(*args, nargout=nargout, background=True,
@@ -78,6 +89,7 @@ class EngineTask(QThread):
                 pass
 
         trace('Closing models asynchronously.')
+        self._record_lifecycle(cleanup_started=True, owned_process_forced=False)
         try:
             future = eng.bdclose('all', nargout=0, background=True, stdout=self._log, stderr=self._log)
             if future is not None:
@@ -95,11 +107,14 @@ class EngineTask(QThread):
         if owned_process is not None:
             trace('Waiting for this run\'s owned MATLAB process.')
             try:
-                if owned_process.close():
+                forced = owned_process.close()
+                self._record_lifecycle(owned_process_forced=forced)
+                if forced:
                     trace('MATLAB exit timed out; closed this run\'s owned process.')
             except Exception as exc:
                 error = error or tr('MATLAB 资源释放失败：{error}', error=exc)
         trace('MATLAB cleanup complete.')
+        self._record_lifecycle(cleanup_completed=True, cleanup_error=error)
         return error
 
     def run(self):

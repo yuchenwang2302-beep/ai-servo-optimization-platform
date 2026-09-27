@@ -306,6 +306,12 @@ class AlgorithmPage(QWidget):
         return self.ax, self.canvas
 
     @property
+    def curve_title(self):
+        algorithm = getattr(self, '_run_algorithm', self.current_algorithm)
+        key = '{algorithm} HV 历史' if self.is_optimization and algorithm in MULTI else '{algorithm} 适应度进化图'
+        return tr(key, algorithm=algorithm)
+
+    @property
     def curve_ylabel(self):
         algorithm = getattr(self, '_run_algorithm', self.current_algorithm)
         return tr('HV（超体积）' if self.is_optimization and algorithm in MULTI else '适应度值')
@@ -359,7 +365,7 @@ class AlgorithmPage(QWidget):
         self.worker.cancelled.connect(self.handle_worker_cancelled)
         ax, canvas = self.convergence_plot
         ax.clear()
-        ax.set_title(tr('{algorithm} 适应度进化图', algorithm=self._run_algorithm), fontsize=14, fontweight='bold')
+        ax.set_title(self.curve_title, fontsize=14, fontweight='bold')
         ax.set_ylabel(self.curve_ylabel, fontsize=12)
         if not self.is_optimization:
             ax.set_xlabel(tr('迭代次数'), fontsize=12)
@@ -420,7 +426,7 @@ class AlgorithmPage(QWidget):
                 ax.set_xlabel(tr('迭代次数'), fontsize=12)
             ax.set_ylabel(self.curve_ylabel, fontsize=12)
             algorithm = getattr(self, '_run_algorithm', self.current_algorithm)
-            ax.set_title(tr('{algorithm} 适应度进化图', algorithm=algorithm), fontsize=14, fontweight='bold')
+            ax.set_title(self.curve_title, fontsize=14, fontweight='bold')
             ax.grid(True, linestyle='--', alpha=0.6)
             valid = np.isfinite(self.gb_data)
             x_data = np.arange(1, len(self.gb_data) + 1)[valid]

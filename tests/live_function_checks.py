@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 import numpy as np
 import matlab.engine
+from scipy.io import loadmat
 from engine_task import EngineTask as MatlabWorker
 from matlab_process import OwnedWindowsProcess
 from run_support import IDENTIFICATION, SINGLE, MULTI, validate_params, read_curve
@@ -80,6 +81,24 @@ try:
                     assert np.isclose(best, measured, rtol=1e-6, atol=1e-10), (best, measured)
                     assert np.isclose(best, curve[-1])
                     details['independent_IAE'] = measured
+                else:
+                    diagnostics = loadmat(worker.data_file, simplify_cells=True)['diagnostics']
+                    archives = diagnostics['archive_objectives']
+                    assert len(archives) == iterations
+                    assert np.allclose(diagnostics['hv']['reference'], [.0275,22,.55])
+                    assert diagnostics['hv']['outside_reference_count'] == 0
+                    for i, objectives in enumerate(archives):
+                        value = eng.servo_hypervolume(matlab.double(np.atleast_2d(objectives).tolist()))
+                        assert np.isclose(value,curve[i],rtol=1e-12,atol=1e-14)
+                    details['hv_reference'] = diagnostics['hv']['reference'].tolist()
+                    details['archive_history_verified'] = True
+                    selection = diagnostics['selection']
+                    selected = int(selection['selected_index']) - 1
+                    np.testing.assert_allclose(selection['weights'], [.5, .4, .1])
+                    np.testing.assert_allclose(selection['selected_objectives'], archives[-1][selected])
+                    np.testing.assert_allclose(selection['selected_parameters'],
+                                               diagnostics['final_archive_parameters'][selected])
+                    details['selection_record_verified'] = True
                 np.savez(output/f'{args.group}_{algorithm}_tracking.npz', time=times, reference=reference, position=position)
             report.append(dict(algorithm=algorithm, passed=True, seconds=round(time.perf_counter()-started,2),
                                curve=curve.tolist(), run_directory=worker.data_folder, **details))

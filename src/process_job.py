@@ -150,10 +150,15 @@ class ProcessJob:
         if self.handle is None:
             return
         processes = []
+        report = {'forced_termination': False, 'active_before_cleanup': None,
+                  'remaining_processes': None, 'exit_signals_verified': False}
         try:
             processes = self._process_handles()
-            if self.active_count():
+            report['active_before_cleanup'] = self.active_count()
+            report['retained_process_handles'] = len(processes)
+            if report['active_before_cleanup']:
                 self.terminate()
+                report['forced_termination'] = True
                 deadline = time.monotonic() + 5
                 while self.active_count() and time.monotonic() < deadline:
                     time.sleep(.05)
@@ -164,6 +169,9 @@ class ProcessJob:
                 remaining = max(0, int((deadline - time.monotonic()) * 1000))
                 if self.api.WaitForSingleObject(process, remaining) != 0:
                     raise RuntimeError(tr('本次计算的子进程未能按时退出。'))
+            report['remaining_processes'] = self.active_count()
+            report['exit_signals_verified'] = True
+            return report
         finally:
             for process in processes:
                 self.api.CloseHandle(process)

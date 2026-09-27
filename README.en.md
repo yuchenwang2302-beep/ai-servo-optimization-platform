@@ -21,6 +21,8 @@ Developed as the UI and data-management component of Xi'an Jiaotong–Liverpool 
 - Separate run folders, logs, history, archiving and automatic cleanup.
 - Resizable plots and controls, with scrolling for smaller windows.
 
+Multi-objective HV uses fixed physical reference scales for the supplied servo model. Per-iteration objective archives are saved for curve verification; see the [metric notes](matlab_scripts/optimization/multi_objectives/support/README.md).
+
 <details>
 <summary>Interface walkthrough and sign-in screen</summary>
 

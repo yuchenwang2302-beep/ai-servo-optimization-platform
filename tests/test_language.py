@@ -217,6 +217,19 @@ class LanguageTests(unittest.TestCase):
         self.assertEqual(page.run_button.text(), 'Run algorithm')
         self.assertTrue(engine.closed)
 
+    def test_multiobjective_title_and_disabled_criterion_in_both_languages(self):
+        for code, title, criterion in [('en', 'MOGOA HV history', 'Overshoot'),
+                                        ('zh', 'MOGOA HV 历史', '超调')]:
+            i18n.set_language(code)
+            page = self.main_window().tab_optimization
+            page.identification_combo.setCurrentIndex(page.identification_combo.findData('multi'))
+            page._run_algorithm = 'MOGOA'
+            page.gb_data = np.array([.7, .8])
+            page.update_plot_from_data()
+            self.assertEqual(page.convergence_ax.get_title(), title)
+            self.assertEqual(page.function_combo.currentText(), criterion)
+            self.assertFalse(page.function_combo.isEnabled())
+
     def test_english_timeout_releases_controls_and_translates_close_dialog(self):
         window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(1)
         page = window.tab_optimization

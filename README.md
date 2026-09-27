@@ -21,6 +21,8 @@
 - 独立运行目录、日志、历史记录、归档与自动清理。
 - 图表和参数区随窗口调整，支持小窗口滚动查看。
 
+多目标 HV 使用当前伺服模型的固定物理参考尺度，每次迭代同时保存目标值，便于核验曲线。详见 [评价指标说明](matlab_scripts/optimization/multi_objectives/support/README.md)。
+
 <details>
 <summary>界面导览与登录页</summary>
 

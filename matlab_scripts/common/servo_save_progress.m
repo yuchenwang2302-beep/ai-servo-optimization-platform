@@ -1,8 +1,12 @@
-function servo_save_progress(data_file, gBV_record, iter)
+function servo_save_progress(data_file, gBV_record, iter, diagnostics)
 % Publish every completed iteration without exposing a partly written MAT file.
 % A run has one writer and its own directory. Readers only open data_file.
 temporary_file = [data_file '.next.mat'];
-save(temporary_file, 'gBV_record', 'iter', '-v7');
+if nargin < 4
+    save(temporary_file, 'gBV_record', 'iter', '-v7');
+else
+    save(temporary_file, 'gBV_record', 'iter', 'diagnostics', '-v7');
+end
 for attempt = 1:5
     [ok, message] = movefile(temporary_file, data_file, 'f');
     if ok

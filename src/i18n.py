@@ -96,6 +96,7 @@ EN = {
     '适应度值': 'Fitness',
     '适应度进化图': 'Fitness convergence',
     '{algorithm} 适应度进化图': '{algorithm} fitness convergence',
+    '{algorithm} HV 历史': '{algorithm} HV history',
     '全局最优值': 'Global best',
     'HV（超体积）': 'HV (hypervolume)',
     '参考位置': 'Reference position',

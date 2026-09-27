@@ -62,6 +62,10 @@ class MatlabWorker(QThread):
         self._ended = None
         self._calculation_started = None
         self._calculation_ended = None
+        self.stop_details = {'requested': False, 'reason': None, 'grace_expired': False,
+                             'child_outcome': None, 'request_to_terminal_seconds': None}
+        self.cleanup_details = None
+        self._stop_requested_at = None
 
     def stop(self):
         self._stop.set()
@@ -88,6 +92,7 @@ class MatlabWorker(QThread):
                 'engine_pid': self.engine_pid, 'limits_seconds': vars(self.limits),
                 'elapsed_seconds': self.timings()[0],
                 'calculation_seconds': self.timings()[1],
+                'stop': self.stop_details, 'process_cleanup': self.cleanup_details,
             }, ensure_ascii=False, indent=2), encoding='utf-8')
         except OSError:
             pass
@@ -185,6 +190,7 @@ class MatlabWorker(QThread):
                                 child_outcome = 'failed'
                             elif event in ('result', 'cancelled'):
                                 child_outcome = event
+                                self.stop_details['child_outcome'] = event
                         # Drain the pipe after exit before deciding whether a final result arrived.
                         if process.poll() is not None and reader_done.is_set() and messages.empty():
                             if stop_deadline is not None:
@@ -200,12 +206,16 @@ class MatlabWorker(QThread):
                         if stop_deadline is None:
                             if self._stop.is_set():
                                 outcome = 'cancelled'
+                                self.stop_details.update(requested=True, reason='user')
+                                self._stop_requested_at = now
                                 self._state('stopping', tr('正在停止本次计算并清理资源…'))
                                 stop_deadline = now + self.limits.cancellation
                             elif now >= deadline:
                                 stage = {'starting': 'MATLAB 启动', 'running': '计算', 'cleaning': '资源清理'}.get(self.state, '任务')
                                 error = tr('{stage}超过设定时限，已停止本次任务。可查看日志、调整时限后重新运行。', stage=tr(stage))
                                 outcome = 'timed_out'
+                                self.stop_details.update(requested=True, reason='deadline', stage=self.state)
+                                self._stop_requested_at = now
                                 self._state('stopping', tr('{stage}超过设定时限，正在停止本次计算并清理资源…', stage=tr(stage)))
                                 stop_deadline = now + self.limits.cancellation
                             if stop_deadline is not None:
@@ -216,6 +226,7 @@ class MatlabWorker(QThread):
                                     pass
                         if stop_deadline is not None and now >= stop_deadline:
                             forced = True
+                            self.stop_details['grace_expired'] = True
                             break  # close() holds descendant identities before terminating the job.
                         if now - last_progress_check >= 1:
                             last_progress_check = now
@@ -241,7 +252,7 @@ class MatlabWorker(QThread):
                 self._calculation_ended = time.monotonic()
             if job is not None:
                 try:
-                    job.close()
+                    self.cleanup_details = job.close()
                 except Exception as exc:
                     error = tr('资源清理失败：{error}', error=exc)
                     outcome = 'failed'
@@ -264,6 +275,8 @@ class MatlabWorker(QThread):
                     process.stdout.close()
             self.running = False
             self._ended = time.monotonic()
+            if self._stop_requested_at is not None:
+                self.stop_details['request_to_terminal_seconds'] = self._ended - self._stop_requested_at
         if outcome == 'succeeded' and result is not None:
             if self.is_optimization:
                 self.optimization_finished.emit(*result)

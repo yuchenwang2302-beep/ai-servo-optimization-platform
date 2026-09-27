@@ -53,6 +53,12 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(len(events), 1, events)
         self.assertLess(time.monotonic() - start, 15)
         self.assertFalse(worker.running)
+        state = json.loads((Path(worker.data_folder) / 'run_state.json').read_text(encoding='utf-8'))
+        self.assertEqual(state['process_cleanup']['remaining_processes'], 0)
+        self.assertTrue(state['process_cleanup']['exit_signals_verified'])
+        if expected in ('cancelled', 'timed_out'):
+            self.assertTrue(state['stop']['requested'])
+            self.assertIsNotNone(state['stop']['request_to_terminal_seconds'])
         for child in owned:
             try:
                 self.assertEqual(child.kernel.WaitForSingleObject(child.handle, 0), 0,
