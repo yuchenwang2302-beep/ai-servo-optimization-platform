@@ -51,6 +51,10 @@ Use **111** for both the demo username and password. Choose an algorithm, enter 
 
 See the [user guide](docs/user-guide.en.md) for details, or try the small [PSO / ISE example](examples/pso_ise/README.md).
 
+## Paper data and figures
+
+The paper's numerical records, controller vectors, response series and plotting scripts are maintained in [paper/](paper/README.md). From the repository root, run `python paper/verify.py` to check the saved records or `python paper/plot.py all` to redraw the three numerical figures. See that directory for instructions.
+
 ## Repository layout
 
 ```text
@@ -58,6 +62,7 @@ src/              Desktop interface, translations and run management
 matlab_scripts/   Identification, optimization and Simulink models
 assets/           Images and interface resources
 examples/         Computation examples and reference results
+paper/            Paper data, numerical checks and plotting scripts
 tests/            Automated and real-simulation checks
 tools/            Environment setup and startup diagnostics
 docs/             Guides and project information

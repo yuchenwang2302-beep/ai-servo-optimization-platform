@@ -1,0 +1,562 @@
+{
+  "application_revision": "43f41420187ec528ac0cf2055a77cfa97bf7cdfa",
+  "application_tag": "paper-evaluation-v2",
+  "software": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.22621-SP0",
+    "matlab": "R2024b"
+  },
+  "model_sha256": {
+    "matlab_scripts/optimization/common/simulate_servo_position.m": "02193ade99b498e618c7779086a94f77284a08a31e88415941e7e8e35099bced",
+    "matlab_scripts/optimization/single_objective/Jerk_FF_Step_2023.slx": "2462a1070bcd954b596d90a4933216c84f69884044f3b9b7b1101b2426ce13f8",
+    "matlab_scripts/optimization/single_objective/fun_position.m": "19646ee247026e85860df6d800f61ef5d584ca303cd2ecb71d489f8ef8ee6301",
+    "matlab_scripts/optimization/single_objective/servo_error_metric.m": "0d446d5fffbfa6b6447de4b8f066618881cecc473a04a0f4c6d06f71d9afd91e",
+    "matlab_scripts/optimization/multi_objectives/Jerk_FF_Step_2023_2.slx": "5fecd650b9287b99cae7ef47257ccc50fbb87174055504ba3ec819717379ee74",
+    "matlab_scripts/optimization/multi_objectives/fun_position_2.m": "2b3d3fe90d5e996a2f40cf74eda460b84bf7d83e614a4140d58290205d6feb2b"
+  },
+  "model_sha256_lf_text": {
+    "matlab_scripts/optimization/common/simulate_servo_position.m": "d9ea38134447c62587a0d8a9a2d4dff39b5396f2d88c129a825df9d52325eafd",
+    "matlab_scripts/optimization/single_objective/Jerk_FF_Step_2023.slx": "2462a1070bcd954b596d90a4933216c84f69884044f3b9b7b1101b2426ce13f8",
+    "matlab_scripts/optimization/single_objective/fun_position.m": "46db33a6b01c3c196ed3ca44551618163344fe6e6fcf223d2d2006eeade7bcb5",
+    "matlab_scripts/optimization/single_objective/servo_error_metric.m": "0d446d5fffbfa6b6447de4b8f066618881cecc473a04a0f4c6d06f71d9afd91e",
+    "matlab_scripts/optimization/multi_objectives/Jerk_FF_Step_2023_2.slx": "5fecd650b9287b99cae7ef47257ccc50fbb87174055504ba3ec819717379ee74",
+    "matlab_scripts/optimization/multi_objectives/fun_position_2.m": "50dd33f6cc4262d05556f88c2ccf1443ab86386aeeda1e9304b02c7f2773065d"
+  },
+  "parameter_order": [
+    "Kp_i",
+    "Ki_i",
+    "Kp_speed",
+    "Ki_speed",
+    "Kp_position",
+    "f1",
+    "f2",
+    "j1",
+    "j2",
+    "j3",
+    "j4"
+  ],
+  "lower_bounds": [
+    1.0,
+    2783.7,
+    0.867,
+    17.2799,
+    0.1,
+    0.0001,
+    1e-09,
+    10.0,
+    10.0,
+    10.0,
+    50.0
+  ],
+  "upper_bounds": [
+    5.0,
+    10398.0,
+    5.0,
+    100.0,
+    3.0,
+    0.1,
+    0.001,
+    30.0,
+    50.0,
+    80.0,
+    500.0
+  ],
+  "primary_cases": [
+    {
+      "mode": "identification",
+      "algorithm": "PSO",
+      "population": 12,
+      "iterations": 40,
+      "states": [
+        {
+          "state": "starting",
+          "wall_seconds": 0.05748139999923296
+        },
+        {
+          "state": "running",
+          "wall_seconds": 11.376618099999178
+        },
+        {
+          "state": "cleaning",
+          "wall_seconds": 121.17129829999976
+        },
+        {
+          "state": "succeeded",
+          "wall_seconds": 133.94232290000036
+        }
+      ],
+      "progress": [
+        {
+          "iteration": 12,
+          "wall_seconds": 118.05805560000044
+        },
+        {
+          "iteration": 26,
+          "wall_seconds": 120.06446580000011
+        },
+        {
+          "iteration": 40,
+          "wall_seconds": 121.0673055999996
+        }
+      ],
+      "errors": [],
+      "seed_policy": "Unmodified application random behaviour; no prescribed seed.",
+      "state": "succeeded",
+      "total_seconds": 133.86000000000058,
+      "calculation_seconds": 109.79600000000028,
+      "form": {
+        "群体粒子个数 (N)": "12",
+        "粒子维数 (D)": "10",
+        "最大迭代次数 (T)": "40",
+        "速度 (vref)": "200",
+        "Lq轴电感范围(t1L)": "[1.5e-4, 2.5e-4]",
+        "Ld轴电感范围(t2L)": "[1.5e-4, 2.5e-4]",
+        "电阻范围(t3L)": "[0.3, 0.4]",
+        "磁链范围(t4L)": "[0.006, 0.007]",
+        "机械参数范围(t5L)": "[5e-5,1e-4]"
+      },
+      "ui_timer_period_seconds": 0.05,
+      "ui_timer_max_gap_seconds": 0.16339309999966645,
+      "ui_timer_p99_gap_seconds": 0.09848292600037896,
+      "best": 2.4930799181223464,
+      "parameters": [
+        0.00016920645922717883,
+        0.00022899299936046802,
+        0.34479205025734244,
+        0.006691352297614765,
+        6.738167140684411e-05,
+        1.3419212346615625,
+        2.219896352933478,
+        0.2179558307295667,
+        3.9735673385565047,
+        0.7204747730615264
+      ],
+      "curve": [
+        2.9160755365068614,
+        2.9160755365068614,
+        2.6275900886571355,
+        2.6275900886571355,
+        2.5990489715268112,
+        2.5990489715268112,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.5369943276283813,
+        2.523041042958236,
+        2.523041042958236,
+        2.523041042958236,
+        2.523041042958236,
+        2.523041042958236,
+        2.523041042958236,
+        2.4930799181223464,
+        2.4930799181223464
+      ]
+    },
+    {
+      "mode": "optimization",
+      "algorithm": "PSO",
+      "population": 6,
+      "iterations": 12,
+      "states": [
+        {
+          "state": "starting",
+          "wall_seconds": 0.10841700000128185
+        },
+        {
+          "state": "running",
+          "wall_seconds": 10.377420600001642
+        },
+        {
+          "state": "cleaning",
+          "wall_seconds": 414.7946976000003
+        },
+        {
+          "state": "succeeded",
+          "wall_seconds": 427.42459970000164
+        }
+      ],
+      "progress": [
+        {
+          "iteration": 1,
+          "wall_seconds": 84.81328380000014
+        },
+        {
+          "iteration": 2,
+          "wall_seconds": 116.049984700001
+        },
+        {
+          "iteration": 3,
+          "wall_seconds": 146.24266630000056
+        },
+        {
+          "iteration": 4,
+          "wall_seconds": 176.47332200000164
+        },
+        {
+          "iteration": 5,
+          "wall_seconds": 206.67366390000097
+        },
+        {
+          "iteration": 6,
+          "wall_seconds": 235.91501000000062
+        },
+        {
+          "iteration": 7,
+          "wall_seconds": 260.07744880000064
+        },
+        {
+          "iteration": 8,
+          "wall_seconds": 290.31091259999994
+        },
+        {
+          "iteration": 9,
+          "wall_seconds": 320.54690030000165
+        },
+        {
+          "iteration": 10,
+          "wall_seconds": 349.78708970000116
+        },
+        {
+          "iteration": 11,
+          "wall_seconds": 380.0006000000012
+        },
+        {
+          "iteration": 12,
+          "wall_seconds": 410.2627846000014
+        }
+      ],
+      "errors": [],
+      "seed_policy": "Unmodified application random behaviour; no prescribed seed.",
+      "state": "succeeded",
+      "total_seconds": 427.26500000000124,
+      "calculation_seconds": 404.4529999999995,
+      "form": {
+        "群体粒子个数 (N)": "6",
+        "粒子维数 (D)": "11",
+        "最大迭代次数 (T)": "12",
+        "objective": "ISE"
+      },
+      "ui_timer_period_seconds": 0.05,
+      "ui_timer_max_gap_seconds": 0.1667544000010821,
+      "ui_timer_p99_gap_seconds": 0.09539086399974621,
+      "best": 0.007304365522821191,
+      "parameters": [
+        1.928196855535594,
+        2783.7,
+        5.0,
+        100.0,
+        3.0,
+        0.02128528405804353,
+        0.001,
+        30.0,
+        50.0,
+        80.0,
+        500.0
+      ],
+      "curve": [
+        0.010279526873976982,
+        0.009943424322607048,
+        0.008696891232853051,
+        0.008079108115392048,
+        0.0075432627000088185,
+        0.0074676838963446835,
+        0.00739674257363687,
+        0.007383741823803841,
+        0.007370665643995008,
+        0.0073486849034149265,
+        0.007311001459716897,
+        0.007304365522821191
+      ],
+      "samples": 10001,
+      "independent_ISE": 0.007304365522821193,
+      "max_objective_discrepancy": 1.734723475976807e-18
+    }
+  ],
+  "single_objective_checks": {
+    "pso": {
+      "name": "pso",
+      "parameters": [
+        1.928196855535594,
+        2783.7,
+        5.0,
+        100.0,
+        3.0,
+        0.02128528405804353,
+        0.001,
+        30.0,
+        50.0,
+        80.0,
+        500.0
+      ],
+      "ISE": 0.007304365522821191,
+      "metrics": {
+        "ISE": 0.007304365522821193,
+        "IAE": 0.02079964860524052,
+        "ITSE": 0.003779522672806816,
+        "ITAE": 0.011164649412684963
+      },
+      "matlab_metrics": {
+        "ISE": 0.007304365522821191,
+        "IAE": 0.020799648605240507,
+        "ITSE": 0.003779522672806815,
+        "ITAE": 0.011164649412684963
+      },
+      "overshoot_percent": 1.5000104904174805,
+      "settling_2percent_seconds": 0.09810000000000008,
+      "seconds": 7.234000000000378
+    },
+    "midpoint": {
+      "name": "midpoint",
+      "parameters": [
+        3.0,
+        6590.85,
+        2.9335,
+        58.63995,
+        1.55,
+        0.050050000000000004,
+        0.0005000005,
+        20.0,
+        30.0,
+        45.0,
+        275.0
+      ],
+      "ISE": 0.01123875485664986,
+      "metrics": {
+        "ISE": 0.011238754856649862,
+        "IAE": 0.033025706542222186,
+        "ITSE": 0.005923425849912462,
+        "ITAE": 0.01858740530871054
+      },
+      "matlab_metrics": {
+        "ISE": 0.01123875485664986,
+        "IAE": 0.0330257065422222,
+        "ITSE": 0.005923425849912462,
+        "ITAE": 0.018587405308710545
+      },
+      "overshoot_percent": 4.4499993324279785,
+      "settling_2percent_seconds": 0.34840000000000004,
+      "seconds": 6.484000000000378
+    },
+    "all_upper": {
+      "name": "all_upper",
+      "parameters": [
+        5.0,
+        10398.0,
+        5.0,
+        100.0,
+        3.0,
+        0.1,
+        0.001,
+        30.0,
+        50.0,
+        80.0,
+        500.0
+      ],
+      "ISE": 0.007198126113779448,
+      "metrics": {
+        "ISE": 0.007198126113779447,
+        "IAE": 0.020489424136673928,
+        "ITSE": 0.0037217827590346098,
+        "ITAE": 0.011033183429396935
+      },
+      "matlab_metrics": {
+        "ISE": 0.007198126113779448,
+        "IAE": 0.020489424136673925,
+        "ITSE": 0.0037217827590346106,
+        "ITAE": 0.011033183429396935
+      },
+      "overshoot_percent": 5.500006675720215,
+      "settling_2percent_seconds": 0.13570000000000004,
+      "seconds": 4.936999999999898
+    }
+  },
+  "multiobjective": {
+    "algorithm": "MOGOA",
+    "population": 8,
+    "archive_capacity": 20,
+    "iterations": 12,
+    "seed_policy": "Existing application random behavior; no imposed seed or curve-based selection.",
+    "terminal_state": "succeeded",
+    "selected_archive_index": 11,
+    "selection_rule": "minmax-weighted-closeness",
+    "selection_weights": [
+      0.5,
+      0.4,
+      0.1
+    ],
+    "final_reported_HV": 0.7869521576828551,
+    "initial_HV": 0.780884883480871,
+    "reference": [
+      0.027500000000000004,
+      22.0,
+      0.55
+    ],
+    "objective_units": [
+      "p.u.",
+      "percent",
+      "s"
+    ],
+    "samples": 10001,
+    "total_seconds": 562.0930000000008,
+    "calculation_seconds": 539.7180000000008,
+    "ui_timer_max_gap_seconds": 0.1569999999992433,
+    "selected_response_objectives": [
+      2.681990610131635e-05,
+      0.25000572204589844,
+      0.14499998092651367
+    ],
+    "response_objective_absolute_tolerance": [
+      1e-07,
+      1e-05,
+      1e-07
+    ]
+  },
+  "archive_pair": {
+    "source_commit": "43f41420187ec528ac0cf2055a77cfa97bf7cdfa",
+    "original_model_hashes_match": true,
+    "selection_rule": "Lowest archive overshoot, ties broken by shortest settling measure then steady error; shortest archive settling measure, ties broken by lowest overshoot then steady error.",
+    "objective_order": [
+      "steady_state_error_pu",
+      "overshoot_percent",
+      "settling_measure_s"
+    ],
+    "independent_check_atol": [
+      1e-06,
+      1e-05,
+      1e-07
+    ],
+    "independent_check_precision": "The inherited backend averages single-precision model signals; the independent check averages the saved signals in float64. The mean-error check allows 1e-6 p.u.; exact archived objective reproduction is checked separately at 1e-7 p.u.",
+    "settling_definition": "Last sample outside +/-0.005 p.u. from the final command, measured from the 0.5 s step, matching the original backend.",
+    "cases": {
+      "low_overshoot": {
+        "archive_index_zero_based": 3,
+        "active_parameters": [
+          3.5294395732513006,
+          10020.680685782425,
+          3.5793596363689533,
+          72.78582907329215,
+          2.130920405021125,
+          0.018768347287024683,
+          0.0006550983485638465,
+          24.866031970844485,
+          16.70770668917641,
+          24.758576694690323,
+          470.7216821142677
+        ],
+        "raw_archive_parameters": [
+          3.5294395732513006,
+          10020.680685782425,
+          3.5793596363689533,
+          72.78582907329215,
+          2.130920405021125,
+          0.018768347287024683,
+          0.0006550983485638465,
+          24.866031970844485,
+          16.70770668917641,
+          24.758576694690323,
+          470.7216821142677,
+          0.5308226552536169
+        ],
+        "archive_objectives": [
+          0.0004938244819641113,
+          0.15000104904174805,
+          0.14569999277591705
+        ],
+        "replay_objectives": [
+          0.0004938244819641113,
+          0.15000104904174805,
+          0.14569999277591705
+        ],
+        "independent_objectives": [
+          0.0004941858028587598,
+          0.15000104904174805,
+          0.14570000000000005
+        ],
+        "peak_position_pu": 0.5007500052452087,
+        "peak_time_s": 0.6595000000000001,
+        "sample_count": 10001
+      },
+      "fast_settling": {
+        "archive_index_zero_based": 7,
+        "active_parameters": [
+          4.259007203946715,
+          10158.971949948807,
+          2.621584115286228,
+          75.4780687967322,
+          0.9125843750434801,
+          0.04395134990306579,
+          0.0007093733891660901,
+          29.80506811174021,
+          45.91436755905299,
+          68.86243919976884,
+          227.55574801914585
+        ],
+        "raw_archive_parameters": [
+          4.259007203946715,
+          10158.971949948807,
+          2.621584115286228,
+          75.4780687967322,
+          0.9125843750434801,
+          0.04395134990306579,
+          0.0007093733891660901,
+          29.80506811174021,
+          45.91436755905299,
+          68.86243919976884,
+          227.55574801914585,
+          0.3802442277030264
+        ],
+        "archive_objectives": [
+          0.0,
+          0.8500099182128906,
+          0.11379999667406082
+        ],
+        "replay_objectives": [
+          0.0,
+          0.8500099182128906,
+          0.11379999667406082
+        ],
+        "independent_objectives": [
+          0.0,
+          0.8500099182128906,
+          0.11380000000000001
+        ],
+        "peak_position_pu": 0.5042500495910645,
+        "peak_time_s": 0.6254000000000001,
+        "sample_count": 10001
+      }
+    },
+    "passed": true
+  },
+  "automatic_checks": {
+    "source_commit": "43f41420187ec528ac0cf2055a77cfa97bf7cdfa",
+    "tests_run": 67,
+    "passed": 67,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 24.15600000000086
+  }
+}

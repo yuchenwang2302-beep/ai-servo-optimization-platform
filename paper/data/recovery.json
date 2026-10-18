@@ -1,0 +1,865 @@
+{
+  "application_revision": "43f41420187ec528ac0cf2055a77cfa97bf7cdfa",
+  "checks": [
+    {
+      "name": "startup_stop_1",
+      "condition": "startup_stop",
+      "passed": true,
+      "latency_seconds": 5.5,
+      "terminal_state": "cancelled",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 7.42200000000048,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "iteration_stop_1",
+      "condition": "iteration_stop",
+      "passed": true,
+      "latency_seconds": 8.26600000000144,
+      "terminal_state": "cancelled",
+      "termination_path": "grace_expired",
+      "total_seconds": 72.01600000000144,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 15,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 15
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 4,
+      "iterations": 8
+    },
+    {
+      "name": "timeout_1",
+      "condition": "timeout",
+      "passed": true,
+      "latency_seconds": 8.186999999999898,
+      "terminal_state": "timed_out",
+      "termination_path": "grace_expired",
+      "total_seconds": 18.82799999999952,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_timeout_1",
+      "condition": "retry_after_timeout",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 67.75,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "engine_crash_1",
+      "condition": "engine_crash",
+      "passed": true,
+      "latency_seconds": 0.23399999999855936,
+      "terminal_state": "failed",
+      "termination_path": "not_applicable",
+      "total_seconds": 9.514999999999418,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_failure_1",
+      "condition": "retry_after_failure",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 67.1869999999999,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "startup_stop_2",
+      "condition": "startup_stop",
+      "passed": true,
+      "latency_seconds": 4.938000000000102,
+      "terminal_state": "cancelled",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 6.906999999999243,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "iteration_stop_2",
+      "condition": "iteration_stop",
+      "passed": true,
+      "latency_seconds": 8.296999999998661,
+      "terminal_state": "cancelled",
+      "termination_path": "grace_expired",
+      "total_seconds": 66.85999999999876,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 15,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 15
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 4,
+      "iterations": 8
+    },
+    {
+      "name": "timeout_2",
+      "condition": "timeout",
+      "passed": true,
+      "latency_seconds": 8.156000000000859,
+      "terminal_state": "timed_out",
+      "termination_path": "grace_expired",
+      "total_seconds": 17.875,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_timeout_2",
+      "condition": "retry_after_timeout",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 69.57799999999952,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "engine_crash_2",
+      "condition": "engine_crash",
+      "passed": true,
+      "latency_seconds": 0.21899999999914144,
+      "terminal_state": "failed",
+      "termination_path": "not_applicable",
+      "total_seconds": 10.25,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_failure_2",
+      "condition": "retry_after_failure",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 71.09399999999914,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "startup_stop_3",
+      "condition": "startup_stop",
+      "passed": true,
+      "latency_seconds": 5.82799999999952,
+      "terminal_state": "cancelled",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 7.734000000000378,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "iteration_stop_3",
+      "condition": "iteration_stop",
+      "passed": true,
+      "latency_seconds": 8.281000000000859,
+      "terminal_state": "cancelled",
+      "termination_path": "grace_expired",
+      "total_seconds": 74.01500000000124,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 15,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 15
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 4,
+      "iterations": 8
+    },
+    {
+      "name": "timeout_3",
+      "condition": "timeout",
+      "passed": true,
+      "latency_seconds": 8.188000000000102,
+      "terminal_state": "timed_out",
+      "termination_path": "grace_expired",
+      "total_seconds": 18.75,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_timeout_3",
+      "condition": "retry_after_timeout",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 70.89099999999962,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "engine_crash_3",
+      "condition": "engine_crash",
+      "passed": true,
+      "latency_seconds": 0.2349999999987631,
+      "terminal_state": "failed",
+      "termination_path": "not_applicable",
+      "total_seconds": 10.093999999999141,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_failure_3",
+      "condition": "retry_after_failure",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 52.70299999999952,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "startup_stop_4",
+      "condition": "startup_stop",
+      "passed": true,
+      "latency_seconds": 6.70299999999952,
+      "terminal_state": "cancelled",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 8.67200000000048,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "iteration_stop_4",
+      "condition": "iteration_stop",
+      "passed": true,
+      "latency_seconds": 8.264999999999418,
+      "terminal_state": "cancelled",
+      "termination_path": "grace_expired",
+      "total_seconds": 53.70299999999952,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 15,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 15
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 4,
+      "iterations": 8
+    },
+    {
+      "name": "timeout_4",
+      "condition": "timeout",
+      "passed": true,
+      "latency_seconds": 8.21900000000096,
+      "terminal_state": "timed_out",
+      "termination_path": "grace_expired",
+      "total_seconds": 19.09400000000096,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_timeout_4",
+      "condition": "retry_after_timeout",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 48.84300000000076,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 4,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 4
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "engine_crash_4",
+      "condition": "engine_crash",
+      "passed": true,
+      "latency_seconds": 0.21899999999914144,
+      "terminal_state": "failed",
+      "termination_path": "not_applicable",
+      "total_seconds": 8.95299999999952,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_failure_4",
+      "condition": "retry_after_failure",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 49.125,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 5,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 5
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "startup_stop_5",
+      "condition": "startup_stop",
+      "passed": true,
+      "latency_seconds": 5.343999999999141,
+      "terminal_state": "cancelled",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 7.313000000000102,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 2,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 2
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "iteration_stop_5",
+      "condition": "iteration_stop",
+      "passed": true,
+      "latency_seconds": 8.28099999999904,
+      "terminal_state": "cancelled",
+      "termination_path": "grace_expired",
+      "total_seconds": 48.73400000000038,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 15,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 15
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 4,
+      "iterations": 8
+    },
+    {
+      "name": "timeout_5",
+      "condition": "timeout",
+      "passed": true,
+      "latency_seconds": 7.063000000000102,
+      "terminal_state": "timed_out",
+      "termination_path": "exited_before_grace",
+      "total_seconds": 16.48400000000038,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": false,
+        "active_before_cleanup": 0,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 0
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_timeout_5",
+      "condition": "retry_after_timeout",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 48.10999999999876,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 4,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 4
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "engine_crash_5",
+      "condition": "engine_crash",
+      "passed": true,
+      "latency_seconds": 0.2349999999987631,
+      "terminal_state": "failed",
+      "termination_path": "not_applicable",
+      "total_seconds": 8.875,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 3,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 3
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    },
+    {
+      "name": "retry_after_failure_5",
+      "condition": "retry_after_failure",
+      "passed": true,
+      "latency_seconds": null,
+      "terminal_state": "succeeded",
+      "termination_path": "not_applicable",
+      "total_seconds": 48.21899999999914,
+      "controls_restored": true,
+      "independent_matlab_alive": true,
+      "process_cleanup": {
+        "forced_termination": true,
+        "active_before_cleanup": 4,
+        "remaining_processes": 0,
+        "exit_signals_verified": true,
+        "retained_process_handles": 4
+      },
+      "all_recorded_processes_exited": true,
+      "limits_seconds": {
+        "startup": 180,
+        "calculation": 1800,
+        "cleanup": 40,
+        "cancellation": 8
+      },
+      "population": 2,
+      "iterations": 1
+    }
+  ],
+  "summary": {
+    "startup_stop": {
+      "n": 5,
+      "median_seconds": 5.5,
+      "max_seconds": 6.70299999999952,
+      "exited_before_grace": 5,
+      "grace_expired": 0,
+      "runs_requiring_any_process_cleanup": 5
+    },
+    "iteration_stop": {
+      "n": 5,
+      "median_seconds": 8.28099999999904,
+      "max_seconds": 8.296999999998661,
+      "exited_before_grace": 0,
+      "grace_expired": 5,
+      "runs_requiring_any_process_cleanup": 5
+    },
+    "timeout": {
+      "n": 5,
+      "median_seconds": 8.186999999999898,
+      "max_seconds": 8.21900000000096,
+      "exited_before_grace": 1,
+      "grace_expired": 4,
+      "runs_requiring_any_process_cleanup": 4
+    },
+    "engine_crash": {
+      "n": 5,
+      "median_seconds": 0.23399999999855936,
+      "max_seconds": 0.2349999999987631,
+      "exited_before_grace": null,
+      "grace_expired": null,
+      "runs_requiring_any_process_cleanup": 5
+    },
+    "retry_after_timeout": {
+      "n": 5,
+      "median_seconds": 67.75,
+      "max_seconds": 70.89099999999962,
+      "exited_before_grace": null,
+      "grace_expired": null,
+      "runs_requiring_any_process_cleanup": 5
+    },
+    "retry_after_failure": {
+      "n": 5,
+      "median_seconds": 52.70299999999952,
+      "max_seconds": 71.09399999999914,
+      "exited_before_grace": null,
+      "grace_expired": null,
+      "runs_requiring_any_process_cleanup": 5
+    }
+  }
+}

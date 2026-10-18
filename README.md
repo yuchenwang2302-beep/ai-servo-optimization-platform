@@ -51,6 +51,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\setup_environmen
 
 详细操作见 [使用指南](docs/使用指南.md)。想先检查一组小规模计算，可运行 [PSO / ISE 示例](examples/pso_ise/README.md)。
 
+## 论文数据与绘图
+
+当前论文的实验记录、控制参数、响应曲线和绘图脚本统一保存在 [paper/](paper/README.md)。在仓库根目录运行 `python paper/verify.py` 可核对已保存结果，运行 `python paper/plot.py all` 可重新生成论文中的三张数值结果图。使用说明见该目录。
+
 ## 项目结构
 
 ```text
@@ -58,6 +62,7 @@ src/              桌面界面、语言与运行管理
 matlab_scripts/   辨识、优化算法及 Simulink 模型
 assets/           界面图片与资源
 examples/         计算示例与参考结果
+paper/            论文数值数据、核对与绘图脚本
 tests/            自动测试和真实仿真检查
 tools/            环境安装与启动诊断
 docs/             使用说明与项目资料
