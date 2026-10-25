@@ -2,17 +2,16 @@
 
 [中文](README.md) | **English**
 
-A desktop platform for servo-system parameter identification and controller optimization, built with **Python / PyQt5 and MATLAB / Simulink**. It provides a bilingual interface, algorithm configuration, result visualization and run history.
+A desktop platform for servo-system controller optimization, built with **Python / PyQt5 and MATLAB / Simulink**. It provides a bilingual interface, algorithm configuration, result visualization and run history.
 
 Developed as the UI and data-management component of Xi'an Jiaotong–Liverpool University's **“AI助力工业控制智能化” (AI for Intelligent Industrial Control)** project, which received a **national first prize in the 2025 fourth university electrical and electronic engineering innovation competition**. **Yuchen Wang** developed this component.
 
-![Optimization interface with a recorded simulation result](docs/images/optimization_en.png)
+![Single-objective optimization interface](docs/images/optimization_en.png)
 
 ## Features
 
 | Module | Algorithms | Outputs |
 | --- | --- | --- |
-| Parameter identification | PSO, GA, DE, IA, FA, HPSO | Fitness convergence, identified parameters and best value |
 | Single-objective optimization | PSO, GA, DE, IA, FA, HPSO | ITSE / ISE / IAE / ITAE, position tracking |
 | Multi-objective optimization | MOGOA, NONMOGOA, LVMOGOA, MDF_MOGOA | Optimization results, HV and position tracking |
 
@@ -24,11 +23,9 @@ Developed as the UI and data-management component of Xi'an Jiaotong–Liverpool 
 Multi-objective HV uses fixed physical reference scales for the supplied servo model. Per-iteration objective archives are saved for curve verification; see the [metric notes](matlab_scripts/optimization/multi_objectives/support/README.md).
 
 <details>
-<summary>Interface walkthrough and sign-in screen</summary>
+<summary>Multi-objective interface and sign-in screen</summary>
 
-![Interface walkthrough](docs/images/walkthrough.gif)
-
-The walkthrough includes a saved result from a real MATLAB calculation.
+![Multi-objective optimization interface](docs/images/multiobjective_en.png)
 
 ![Sign-in](docs/images/login_en.png)
 

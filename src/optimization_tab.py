@@ -117,7 +117,7 @@ class OptimizationTab(AlgorithmPage):
         right_layout.addWidget(top_control_widget)
 
         # 第一行：辨识选项
-        identification_label = QLabel(tr("辨识选项:"))
+        identification_label = QLabel(tr("优化模式:"))
         identification_label.setFont(QFont("Microsoft YaHei", 10, QFont.Bold))
         top_control_layout.addWidget(identification_label, 0, 0)
 

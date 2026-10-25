@@ -33,7 +33,7 @@ class InteractionTests(unittest.TestCase):
         run_paths.start(); self.addCleanup(run_paths.stop)
         self.window = SecondWindow(maintenance=False)
         self.window.show()
-        self.window.findChild(QTabWidget).setCurrentIndex(1)
+        self.window.findChild(QTabWidget).setCurrentIndex(0)
         self.panel = self.window.tab_optimization
         self.app.processEvents()
 
@@ -139,7 +139,7 @@ class InteractionTests(unittest.TestCase):
             self.panel.start_run()
         QTest.qWait(300)
         self.assertTrue(self.panel.stop_button.isEnabled())
-        self.assertFalse(self.window.tab_identification.run_button.isEnabled())
+        self.assertFalse(self.window.tab_optimization.run_button.isEnabled())
         QTest.mouseClick(self.panel.stop_button, Qt.LeftButton)
         self.wait_idle()
         self.assertTrue(self.panel.run_button.isEnabled())

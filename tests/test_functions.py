@@ -204,14 +204,10 @@ class UiTests(unittest.TestCase):
             self.app.processEvents();QTest.qWait(10)
         self.assertFalse(self.window._busy)
 
-    def test_two_pages_and_all_forms(self):
+    def test_optimization_page_and_all_forms(self):
         original = json.loads((ROOT/'tests/fixtures/original_forms.json').read_text(encoding='utf-8'))
-        self.assertEqual(self.window.findChild(QTabWidget).count(),2)
-        for i in range(self.window.tab_identification.algorithm_combo.count()):
-            self.window.tab_identification.algorithm_combo.setCurrentIndex(i)
-            values={k:v.text() for k,v in self.window.tab_identification.params.items()}
-            self.assertEqual(values,original['identification/'+self.window.tab_identification.current_algorithm])
-            validate_params(self.window.tab_identification.current_algorithm,values)
+        self.assertEqual(self.window.findChild(QTabWidget).count(), 1)
+        self.assertFalse(hasattr(self.window, 'tab_identification'))
         panel=self.window.tab_optimization
         for mode in range(2):
             panel.identification_combo.setCurrentIndex(mode)
@@ -223,14 +219,14 @@ class UiTests(unittest.TestCase):
                 validate_params(panel.current_algorithm,values,True)
 
     def test_invalid_input_preserves_previous_result(self):
-        self.window.tab_identification.gb_data=np.array([3.,2.]);self.window.tab_identification.params['最大迭代次数 (T)'].setText('0')
-        self.window.tab_identification.run_identification()
-        np.testing.assert_array_equal(self.window.tab_identification.gb_data,[3.,2.])
-        self.assertFalse(hasattr(self.window.tab_identification,'worker'))
+        self.window.tab_optimization.gb_data=np.array([3.,2.]);self.window.tab_optimization.params['最大迭代次数 (T)'].setText('0')
+        self.window.tab_optimization.run_optimization()
+        np.testing.assert_array_equal(self.window.tab_optimization.gb_data,[3.,2.])
+        self.assertFalse(hasattr(self.window.tab_optimization,'worker'))
 
-    def test_busy_locks_both_pages_and_prevents_close(self):
+    def test_busy_locks_optimization_and_prevents_close(self):
         self.window.set_run_busy(True)
-        self.assertFalse(self.window.tab_identification.algorithm_combo.isEnabled())
+        self.assertFalse(self.window.tab_optimization.algorithm_combo.isEnabled())
         self.assertFalse(self.window.tab_optimization.run_button.isEnabled())
         self.assertFalse(self.window.close());self.assertTrue(self.window.isVisible())
         self.window.tab_optimization.run_optimization()
@@ -261,25 +257,7 @@ class UiTests(unittest.TestCase):
         self.assertTrue(panel.run_button.isEnabled())
         self.assertIn('test failure',' '.join(x.text() for x in panel.info_form_widget.findChildren(QLabel)))
 
-    def test_identification_forwards_ranges_and_displays_final_result(self):
-        engine=Engine()
-        def factory(*args,**kwargs):
-            kwargs.pop('runtime_limit_seconds', None)
-            kwargs['engine_factory']=lambda **kw:Future(engine)
-            return MatlabWorker(*args,**kwargs)
-        self.window.tab_identification.params['Lq轴电感范围(t1L)'].setText('[1.6e-4, 2.4e-4]')
-        self.window.tab_identification.params['最大迭代次数 (T)'].setText('2')
-        with patch('algorithm_page.MatlabWorker',side_effect=factory), patch.dict(sys.modules,{'matlab':SimpleNamespace(double=lambda value:value)}):
-            self.window.tab_identification.run_identification();self.wait_for_worker()
-        self.assertEqual(engine.args[1][-1][0],[1.6e-4,2.4e-4])
-        np.testing.assert_array_equal(self.window.tab_identification.gb_data,[1.,0.])
-        self.assertIn('运行完成',' '.join(x.text() for x in self.window.tab_identification.info_form_widget.findChildren(QLabel)))
-
     def test_one_iteration_has_visible_point(self):
-        self.window.tab_identification.gb_data = np.array([0.])
-        self.window.tab_identification._run_params = {'最大迭代次数 (T)': 1}
-        self.window.tab_identification.update_plot_from_data()
-        self.assertEqual(self.window.tab_identification.line.get_marker(), 'o')
         panel = self.window.tab_optimization
         panel.gb_data = np.array([0.])
         panel._run_params = {'最大迭代次数 (T)': 1}

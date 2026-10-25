@@ -12,7 +12,7 @@ On a configured computer, double-click **[start_ui.bat](../start_ui.bat)** in th
 
 1. Select **中文 / English** in the upper-right corner of the sign-in window.
 2. Use **111** for both the demo username and password. Click the button or press Enter.
-3. Select an identification or optimization mode, choose an algorithm, enter parameters and click **Run algorithm**.
+3. Select single-objective or multi-objective optimization, choose an algorithm, enter parameters and click **Run algorithm**.
 
 Passwords are hidden by default. Use the eye icon to show or hide the password, and Tab to move between fields and controls. After a failed sign-in, dismissing the message selects the input that needs correction so it can be replaced directly.
 
@@ -74,7 +74,6 @@ The main window adapts to the available screen. Narrow windows place controls ab
 Each run receives a separate timestamped directory with a unique identifier:
 
 ```text
-runtime/identification/<run-id>/
 runtime/optimization/<run-id>/
 ```
 

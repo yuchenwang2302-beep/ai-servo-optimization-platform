@@ -23,7 +23,7 @@ app = QApplication([])
 QFontDatabase.addApplicationFont('C:/Windows/Fonts/msyh.ttc')
 window = SecondWindow(maintenance=False)
 window.resize(1366, 720); window.show()
-window.findChild(QTabWidget).setCurrentIndex(1)
+window.findChild(QTabWidget).setCurrentIndex(0)
 panel = window.tab_optimization
 panel.data_folder = str(output)
 panel.params['群体粒子个数 (N)'].setText('2')

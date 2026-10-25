@@ -2,17 +2,16 @@
 
 **中文** | [English](README.en.md)
 
-基于 **Python / PyQt5 与 MATLAB / Simulink** 的伺服系统参数辨识与控制参数优化平台，支持中英文界面、算法配置、结果可视化和运行记录管理。
+基于 **Python / PyQt5 与 MATLAB / Simulink** 的伺服系统控制参数优化平台，支持中英文界面、算法配置、结果可视化和运行记录管理。
 
 本项目是西交利物浦大学 **“AI助力工业控制智能化”** 竞赛作品的界面与数据管理部分，获 **2025 年第四届高校电气电子工程创新大赛全国赛一等奖**。UI 与数据管理模块由 **Yuchen Wang（王雨晨）** 开发。
 
-![优化界面与实际仿真结果](docs/images/optimization_zh.png)
+![单目标优化界面](docs/images/optimization_zh.png)
 
 ## 功能
 
 | 模块 | 算法 | 结果展示 |
 | --- | --- | --- |
-| 参数辨识 | PSO、GA、DE、IA、FA、HPSO | 适应度曲线、辨识参数与最优值 |
 | 单目标优化 | PSO、GA、DE、IA、FA、HPSO | ITSE / ISE / IAE / ITAE，位置跟踪曲线 |
 | 多目标优化 | MOGOA、NONMOGOA、LVMOGOA、MDF_MOGOA | 多目标优化结果、HV 与位置跟踪曲线 |
 
@@ -24,11 +23,9 @@
 多目标 HV 使用当前伺服模型的固定物理参考尺度，每次迭代同时保存目标值，便于核验曲线。详见 [评价指标说明](matlab_scripts/optimization/multi_objectives/support/README.md)。
 
 <details>
-<summary>界面导览与登录页</summary>
+<summary>多目标优化界面与登录页</summary>
 
-![界面导览](docs/images/walkthrough.gif)
-
-导览包含一次已保存的真实 MATLAB 计算结果。
+![多目标优化界面](docs/images/multiobjective_zh.png)
 
 ![登录页](docs/images/login_zh.png)
 

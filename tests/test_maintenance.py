@@ -140,7 +140,7 @@ class DisplayAndClockTests(unittest.TestCase):
             tabs = window.findChild(QTabWidget)
             for width, height in ((800, 600), (1366, 720), (1920, 1000)):
                 window.resize(width, height)
-                for index in (0, 1):
+                for index in range(tabs.count()):
                     tabs.setCurrentIndex(index)
                     self.app.processEvents(); self.app.processEvents()
                     page = tabs.widget(index)

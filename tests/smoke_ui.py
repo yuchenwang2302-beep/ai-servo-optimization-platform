@@ -44,21 +44,17 @@ class UiSmokeTest(unittest.TestCase):
                 self.assertTrue(window.isVisible())
                 self.assertFalse(dialog.isVisible())
                 tabs = window.findChild(QTabWidget)
-                self.assertEqual(tabs.count(), 2)
+                self.assertEqual(tabs.count(), 1)
                 for index in range(tabs.count()):
                     tabs.setCurrentIndex(index)
                     self.app.processEvents()
-                for index in range(window.tab_identification.algorithm_combo.count()):
-                    window.tab_identification.algorithm_combo.setCurrentIndex(index)
-                    self.assertTrue(window.tab_identification.params)
                 opt = window.tab_optimization
                 for kind in range(opt.identification_combo.count()):
                     opt.identification_combo.setCurrentIndex(kind)
                     for index in range(opt.algorithm_combo.count()):
                         opt.algorithm_combo.setCurrentIndex(index)
                         self.assertTrue(opt.params)
-                self.assertNotEqual(window.tab_identification.data_files['PSO'], opt.data_files['PSO'])
-                for owner in (window.tab_identification, opt):
+                for owner in (opt,):
                     self.assertTrue(all(Path(p).is_absolute() for p in owner.data_files.values()))
                 window.close()
             finally:

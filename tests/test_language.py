@@ -154,32 +154,30 @@ class LanguageTests(unittest.TestCase):
         baseline = json.loads((ROOT / 'tests/fixtures/original_forms.json').read_text(encoding='utf-8'))
         window = self.main_window()
         tabs = window.findChild(QTabWidget)
-        self.assertEqual([tabs.tabText(i) for i in range(2)], ['Identification', 'Optimization'])
+        self.assertEqual([tabs.tabText(i) for i in range(tabs.count())], ['Optimization'])
         visited = 0
-        for index, page in enumerate((window.tab_identification, window.tab_optimization)):
-            tabs.setCurrentIndex(index)
-            for mode in range(2 if index else 1):
-                if index:
-                    page.identification_combo.setCurrentIndex(mode)
-                    self.assertEqual(page.identification_combo.currentData(), 'multi' if mode else 'single')
-                    self.assertEqual(page.function_combo.isEnabled(), not mode)
-                    window.set_run_busy(True);window.release_run()
-                    self.assertEqual(page.function_combo.isEnabled(), not mode)
-                for algorithm in range(page.algorithm_combo.count()):
-                    page.algorithm_combo.setCurrentIndex(algorithm)
-                    self.app.processEvents()
-                    prefix = 'identification' if not index else 'multi' if mode else 'single'
-                    values = {k: v.text() for k, v in page.params.items()}
-                    self.assertEqual(values, baseline[prefix + '/' + page.current_algorithm])
-                    normalized = validate_params(page.current_algorithm, page.form_values(), bool(index))
-                    self.assertEqual(normalized['最大迭代次数 (T)'], int(values['最大迭代次数 (T)']))
-                    for label in page.findChildren(QLabel):
-                        if label.isVisible():self.assert_english(label.text())
-                    visited += 1
-        self.assertEqual(visited, 16)
+        page = window.tab_optimization
+        for mode in range(2):
+            page.identification_combo.setCurrentIndex(mode)
+            self.assertEqual(page.identification_combo.currentData(), 'multi' if mode else 'single')
+            self.assertEqual(page.function_combo.isEnabled(), not mode)
+            window.set_run_busy(True);window.release_run()
+            self.assertEqual(page.function_combo.isEnabled(), not mode)
+            for algorithm in range(page.algorithm_combo.count()):
+                page.algorithm_combo.setCurrentIndex(algorithm)
+                self.app.processEvents()
+                prefix = 'multi' if mode else 'single'
+                values = {k: v.text() for k, v in page.params.items()}
+                self.assertEqual(values, baseline[prefix + '/' + page.current_algorithm])
+                normalized = validate_params(page.current_algorithm, page.form_values(), True)
+                self.assertEqual(normalized['最大迭代次数 (T)'], int(values['最大迭代次数 (T)']))
+                for label in page.findChildren(QLabel):
+                    if label.isVisible():self.assert_english(label.text())
+                visited += 1
+        self.assertEqual(visited, 10)
 
     def test_english_validation_focus_and_wrapped_error(self):
-        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(1)
+        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(0)
         page = window.tab_optimization
         page.algorithm_combo.setCurrentText('IA')
         page.params['群体粒子个数 (N)'].setText('3')
@@ -195,7 +193,7 @@ class LanguageTests(unittest.TestCase):
         np.testing.assert_array_equal(page.gb_data, [3., 1.])
 
     def test_english_complete_run_keeps_engine_arguments_and_translates_results(self):
-        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(1)
+        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(0)
         page = window.tab_optimization
         page.params['最大迭代次数 (T)'].setText('2')
         page.function_combo.setCurrentText('IAE')
@@ -231,7 +229,7 @@ class LanguageTests(unittest.TestCase):
             self.assertFalse(page.function_combo.isEnabled())
 
     def test_english_timeout_releases_controls_and_translates_close_dialog(self):
-        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(1)
+        window = self.main_window();window.findChild(QTabWidget).setCurrentIndex(0)
         page = window.tab_optimization
         def factory(*args, **kwargs):
             args = list(args);args[1] = dict(args[1], _scenario='calculation_hang')

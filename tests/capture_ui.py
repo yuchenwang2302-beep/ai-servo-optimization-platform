@@ -32,13 +32,7 @@ dialog.close()
 window = SecondWindow(maintenance=False)
 window.show()
 app.processEvents()
-window.grab().save(str(args.output / 'identification.png'))
 forms = {}
-page = window.tab_identification if hasattr(window.tab_identification, 'params') else window
-for i in range(page.algorithm_combo.count()):
-    page.algorithm_combo.setCurrentIndex(i)
-    forms['identification/' + page.current_algorithm] = {k: v.text() for k, v in page.params.items()}
-window.findChild(QTabWidget).setCurrentIndex(1)
 page = window.tab_optimization
 for mode, name in enumerate(('single', 'multi')):
     page.identification_combo.setCurrentIndex(mode)

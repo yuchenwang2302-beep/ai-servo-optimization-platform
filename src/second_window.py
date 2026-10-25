@@ -6,7 +6,6 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QTabWidget, QGraphicsDropShadowEffect
 from notice_dialog import NoticeDialog
 from PyQt5.QtGui import QColor
-from identification_tab import IdentificationTab
 from optimization_tab import OptimizationTab
 from responsive_page import ResponsivePage
 from history_dialog import HistoryDialog, HistoryJob
@@ -86,8 +85,6 @@ class SecondWindow(QMainWindow):
         main_layout.addWidget(tab_widget)
 
         self.tab_optimization = OptimizationTab(self)
-        self.tab_identification = IdentificationTab(self)
-        tab_widget.addTab(ResponsivePage(self.tab_identification), tr("辨识算法"))
         tab_widget.addTab(ResponsivePage(self.tab_optimization), tr("优化算法"))
 
         shadow = QGraphicsDropShadowEffect(central_widget)
@@ -166,13 +163,12 @@ class SecondWindow(QMainWindow):
             event.ignore()
             return
         self._maintenance_timer.stop()
-        self.tab_identification.data_timer.stop()
         self.tab_optimization.data_timer.stop()
         event.accept()
 
     def set_run_busy(self, busy):
         self._busy = busy
-        for page in (self.tab_identification, self.tab_optimization):
+        for page in (self.tab_optimization,):
             page.run_button.setEnabled(not busy)
             page.algorithm_combo.setEnabled(not busy)
             page.runtime_minutes.setEnabled(not busy)

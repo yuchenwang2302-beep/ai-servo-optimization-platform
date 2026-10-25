@@ -248,7 +248,7 @@ class Ui_Dialog:
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(f'{APP_NAME} · {tr("登录")}')
-        self.project_description.setText(tr('参数辨识 · 控制优化'))
+        self.project_description.setText(tr('单目标 · 多目标控制优化'))
         self.welcome_label.setText(tr('欢迎使用'))
         self.description.setText(tr('登录以进入伺服系统研究工作台。'))
         self.pushButton.setText(tr('登录'))
