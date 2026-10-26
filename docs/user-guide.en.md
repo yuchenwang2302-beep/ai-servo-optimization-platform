@@ -92,6 +92,6 @@ Files are generated as the run progresses. An early cancellation or startup fail
 
 Automatic cleanup is enabled by default and checked after opening the main window, hourly, and after a run finishes. It keeps records from the last **30 days**, plus the latest **20 finished, unarchived runs**. Archived, unfinished and incomplete records are protected. For finished, unarchived runs older than **7 days**, rebuildable `slprj/` and `*.slxc` simulation caches can be cleared while retaining results, curves and logs.
 
-The history window lets you disable automatic cleanup or change retention to 7–3650 days. **Clean up by policy** saves the current settings and applies the same rules immediately; it does not erase all history. Settings are stored in `runtime/retention.json`, with the latest cleanup summary in `runtime/last_cleanup.json`. Cleanup only manages recognized records directly within the two run directories above; historical test reports, unknown folders, links and junctions are not recursively deleted.
+The history window lets you disable automatic cleanup or change retention to 7–3650 days. **Clean up by policy** saves the current settings and applies the same rules immediately; it does not erase all history. Settings are stored in `runtime/retention.json`, with the latest cleanup summary in `runtime/last_cleanup.json`. Cleanup only manages recognized run records under runtime/; historical test reports, unknown folders, links and junctions are not recursively deleted.
 
 `runtime/` is excluded from Git.

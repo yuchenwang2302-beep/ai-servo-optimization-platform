@@ -27,4 +27,4 @@ MOGOA reference:
 
 ## 中文
 
-原创 Python 应用采用 GPLv3；MOGOA 保留 BSD 条款，PlatEMO 辅助函数保留研究使用及论文引用说明。团队算法、模型和校园照片已确认可公开，原有权属与条款继续有效。MATLAB 与 Python 依赖由使用者另行安装。
+原创 Python 应用采用 GPLv3；MOGOA 保留 BSD 条款，PlatEMO 辅助函数保留研究使用及论文引用说明。团队算法和模型经许可收录，保留原有权属与条款。MATLAB 与 Python 依赖由使用者另行安装。

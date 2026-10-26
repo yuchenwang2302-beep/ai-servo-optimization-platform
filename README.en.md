@@ -4,7 +4,7 @@
 
 A desktop platform for servo-system controller optimization, built with **Python / PyQt5 and MATLAB / Simulink**. It provides a bilingual interface, algorithm configuration, result visualization and run history.
 
-Developed as the UI and data-management component of Xi'an Jiaotong–Liverpool University's **“AI助力工业控制智能化” (AI for Intelligent Industrial Control)** project, which received a **national first prize in the 2025 fourth university electrical and electronic engineering innovation competition**. **Yuchen Wang** developed this component.
+The UI and data-management component was developed by **Yuchen Wang** for Xi'an Jiaotong-Liverpool University's **AI for Intelligent Industrial Control** project, which won a **national first prize at the 4th University Electrical and Electronic Engineering Innovation Competition (2025)**.
 
 ![Single-objective optimization interface](docs/images/optimization_en.png)
 
