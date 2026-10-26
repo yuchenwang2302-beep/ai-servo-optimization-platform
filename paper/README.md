@@ -1,10 +1,8 @@
 # Paper data and numerical figures
 
-[中文说明](#中文说明)
+Numerical records and plotting scripts for *A Unified Task-Oriented Framework for Servo Controller Optimization*.
 
-Numerical records for *A Unified Task-Oriented Framework for Servo Parameter Identification and Controller Optimization*. This directory is the maintained location for the paper's data and plotting scripts.
-
-The evaluated application is `paper-evaluation-v2` (`43f41420187ec528ac0cf2055a77cfa97bf7cdfa`). The application and model sources are in the parent repository. The data here include the 12-iteration PSO case and the two controller selections from the 13-member MOGOA archive.
+The reported experiments were recorded with tag `paper-evaluation-v2` (`43f41420187ec528ac0cf2055a77cfa97bf7cdfa`). Tag `optimization-ui-v1` contains the same numerical routines and Simulink models; it changes only the interface, which is restricted to controller tuning. The data here include the 12-iteration PSO case and the two controller selections from the 13-member MOGOA archive.
 
 ## Use
 
@@ -28,7 +26,7 @@ python paper/plot.py all
 | Table III: single-objective response checks | `data/results.json`, `data/single_objective.csv` | |
 | Table IV: interruption and failure checks | `data/recovery.json` | |
 
-`data/identification.csv` contains the 40-iteration residual history; its ten returned variables are in `results.json`. `data/multiobjective_gui.csv` retains the response selected automatically by the interface. The GUI selection and the two preference selections in Fig. 5 are identified separately in `results.json`.
+`data/multiobjective_gui.csv` retains the response selected automatically by the interface. The GUI selection and the two preference selections in Fig. 5 are identified separately in `results.json`.
 
 All response CSV files retain 10,001 samples at their recorded precision. Time is in seconds and position is in per-unit, with one unit corresponding to 360 degrees. The reference changes from 0 to 0.5 p.u. at 0.5 s, and the simulation ends at 1 s.
 
@@ -54,17 +52,3 @@ replay_controllers;
 This evaluates the saved PSO, midpoint, all-upper-bound, low-overshoot, fast-settling and original GUI-selected vectors. Outputs go to `runtime/paper_replay/`. It uses the saved vectors rather than repeating the stochastic searches. The numerical routines and their original model initialization remain in `matlab_scripts/`.
 
 Source code follows the repository [license](../LICENSE); existing model and third-party terms are described in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
-
-## 中文说明
-
-这里统一保存当前论文使用的数值数据和绘图脚本。以后修改论文结果时，更新本目录中的对应文件即可。
-
-常用操作：
-
-1. 查看参数：打开 `data/controller_parameters.csv`。
-2. 查看曲线数据：打开 `data/single_objective.csv` 或 `data/multiobjective_responses.csv`。
-3. 核对数值：在仓库根目录运行 `python paper/verify.py`。
-4. 重新画图：运行 `python paper/plot.py all`，或把 `all` 换成 `3`、`4`、`5`。
-5. 在 `paper/output/` 找到 PDF，上传到 Overleaf 的 `figures/` 文件夹，覆盖同名图片。
-
-Python 绘图只读取现有数据。需要用原模型重新计算已保存控制器时，再使用上面的 MATLAB 命令。
