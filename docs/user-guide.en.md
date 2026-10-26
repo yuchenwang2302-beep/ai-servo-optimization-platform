@@ -20,7 +20,7 @@ Changing the language updates the sign-in window immediately. The main window us
 
 The launcher uses the project's own Python and isolated `.venv`. Before opening the interface, it checks dependency versions, MATLAB Engine, the MATLAB installation and model files. Failed checks stop startup and report the reason; the launcher does not fall back to system Python. Reports are saved under `runtime/startup/`.
 
-MATLAB starts automatically when **Run algorithm** is clicked. Opening the sign-in window does not start MATLAB or validate a license. Actual computation requires a valid license. The demo sign-in is an entry screen, not an authentication or access-control system.
+MATLAB starts automatically when **Run algorithm** is clicked. Opening the sign-in window does not start MATLAB or validate a license. Actual computation requires a valid license.
 
 ## Installation and environment
 
@@ -50,7 +50,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\setup_environmen
 
 Installation requires internet access to download pinned Python, build-tool and dependency versions, with file-integrity checks. The base Python runtime is installed in `.python/` and runtime dependencies in `.venv/`. The script does not modify system Python or the system PATH. An existing valid environment is checked and retained; an invalid or incomplete environment is reported without being overwritten.
 
-Do not copy `.venv` directly to another computer or project path. Preserve the old environment and rebuild at the new location. For everyday use, launch through `start_ui.bat`; manual environment activation and global `python` or `login` commands are unnecessary. Detailed maintenance and recovery instructions are available in the [environment guide](../docs/环境与维护.md).
+Do not copy `.venv` directly to another computer or project path. Preserve the old environment and rebuild at the new location. For everyday use, launch through `start_ui.bat`; manual environment activation is not needed. Detailed maintenance and recovery instructions are available in the [environment guide](../docs/环境与维护.md).
 
 ## Time limits and stopping
 
@@ -94,4 +94,4 @@ Automatic cleanup is enabled by default and checked after opening the main windo
 
 The history window lets you disable automatic cleanup or change retention to 7–3650 days. **Clean up by policy** saves the current settings and applies the same rules immediately; it does not erase all history. Settings are stored in `runtime/retention.json`, with the latest cleanup summary in `runtime/last_cleanup.json`. Cleanup only manages recognized records directly within the two run directories above; historical test reports, unknown folders, links and junctions are not recursively deleted.
 
-`runtime/` is excluded from Git. These records do not provide complete experiment versioning or checkpoint-based resumption.
+`runtime/` is excluded from Git.

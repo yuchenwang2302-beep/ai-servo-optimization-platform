@@ -56,7 +56,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\setup_environmen
 
 ```text
 src/              桌面界面、语言与运行管理
-matlab_scripts/   辨识、优化算法及 Simulink 模型
+matlab_scripts/   优化算法、Simulink 模型及早期辨识脚本（界面未使用）
 assets/           界面图片与资源
 examples/         计算示例与参考结果
 paper/            论文数值数据、核对与绘图脚本

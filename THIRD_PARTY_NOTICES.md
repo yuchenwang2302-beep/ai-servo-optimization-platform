@@ -7,8 +7,8 @@ Original author notices are retained in the source files. The application's GPLv
 | MOGOA and its original helper functions | Seyedali Mirjalili, [MOGOA distribution](https://www.mathworks.com/matlabcentral/fileexchange/63786-mogoa-multi-objective-grasshopper-optimization-algorithm). [BSD 2-Clause license](licenses/MOGOA-BSD-2-Clause.txt). Includes `MOGOA.m`, `dominates.m`, `HandleFullArchive.m`, `initialization.m`, `RankingProcess.m`, `RouletteWheelSelection.m`, `S_func.m` and `UpdateArchive.m`. |
 | `UniformPoint.m`, `myHV.m`, `myIGD.m`, `myDM.m`, `myDeltaP.m` | BIMK Group, [PlatEMO](https://github.com/BIMK/PlatEMO), based on the project's version 4.7 materials. [Original research-use and citation notice](licenses/PlatEMO-notice.txt). These files are not relicensed as GPL. |
 | `distance.m` | Roland Bunschoten, University of Amsterdam. Its retained notice permits modification and distribution with author acknowledgement. |
-| Other MATLAB algorithms, adaptations and four Simulink models | Competition-team materials, included with confirmed publication permission. Existing authorship and terms are retained. The [recovery manifest](docs/provenance/recovered_dependencies.json) records recovered file sources. |
-| `assets/school.jpg` and its embedded copy in `src/codes_rc.py` | Campus photograph included with confirmed publication permission. Image rights remain separate from the Python code license. |
+| Other MATLAB algorithms, adaptations and four Simulink models | Competition-team materials, included with the team's permission. Existing author notes are retained. |
+| `assets/school.jpg` and its embedded copy in `src/codes_rc.py` | Campus photograph included with permission. Image rights remain separate from the Python code license. |
 
 When using PlatEMO-derived code in a publication, cite:
 
@@ -16,7 +16,7 @@ When using PlatEMO-derived code in a publication, cite:
 
 MOGOA reference:
 
-> S. Z. Mirjalili, S. Mirjalili, S. Saremi, H. Fatis, and H. Aljarah. Grasshopper optimization algorithm for multi-objective optimization problems. Applied Intelligence, 2017. DOI: 10.1007/s10489-017-1019-8.
+> S. Z. Mirjalili, S. Mirjalili, S. Saremi, H. Faris, and I. Aljarah. Grasshopper optimization algorithm for multi-objective optimization problems. Applied Intelligence, 48(4), 805–820, 2018. DOI: 10.1007/s10489-017-1019-8.
 
 ## Installed dependencies
 

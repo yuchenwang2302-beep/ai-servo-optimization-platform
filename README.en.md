@@ -56,7 +56,7 @@ The paper's numerical records, controller vectors, response series and plotting 
 
 ```text
 src/              Desktop interface, translations and run management
-matlab_scripts/   Identification, optimization and Simulink models
+matlab_scripts/   Optimization routines, Simulink models and legacy identification scripts (not used by the UI)
 assets/           Images and interface resources
 examples/         Computation examples and reference results
 paper/            Paper data, numerical checks and plotting scripts

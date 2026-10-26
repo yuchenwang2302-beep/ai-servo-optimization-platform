@@ -1,4 +1,4 @@
-"""Paper figure: run via draw.py. Inputs in data/, exports in output/."""
+"""Paper figure: run via plot.py. Inputs in data/, exports in output/."""
 from pathlib import Path
 import json
 import numpy as np

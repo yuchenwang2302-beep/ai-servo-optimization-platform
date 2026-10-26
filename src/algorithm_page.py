@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 Yuchen Wang
 # SPDX-License-Identifier: GPL-3.0-only
-"""Shared form, run lifecycle and convergence display for the two Qt pages."""
+"""Shared form, run lifecycle and convergence display for the algorithm pages."""
 from i18n import tr
 from pathlib import Path
 import logging

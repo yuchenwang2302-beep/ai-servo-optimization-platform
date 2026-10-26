@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 Yuchen Wang
 # SPDX-License-Identifier: GPL-3.0-only
-"""Single- and multi-objective optimization page with the original layout."""
+"""Single- and multi-objective optimization page."""
 from i18n import tr
 import traceback
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel, QPushButton, QFormLayout, QComboBox, QScrollArea, QSizePolicy, QGraphicsDropShadowEffect
@@ -116,7 +116,7 @@ class OptimizationTab(AlgorithmPage):
         top_control_layout.setContentsMargins(15, 15, 15, 15)
         right_layout.addWidget(top_control_widget)
 
-        # 第一行：辨识选项
+        # 第一行：优化模式（单目标/多目标）
         identification_label = QLabel(tr("优化模式:"))
         identification_label.setFont(QFont("Microsoft YaHei", 10, QFont.Bold))
         top_control_layout.addWidget(identification_label, 0, 0)
@@ -263,7 +263,7 @@ class OptimizationTab(AlgorithmPage):
         right_layout.setStretch(3, 2)  # 信息统计区域
 
         # 初始化
-        self.identification_selected()  # 先根据辨识选项初始化算法选择
+        self.identification_selected()  # 先根据优化模式初始化算法选择
         self.init_dynamic_plot()
 
     def get_combo_style(self):
@@ -365,8 +365,8 @@ class OptimizationTab(AlgorithmPage):
         self.tracking_canvas.draw()
 
     def identification_selected(self):
-        """根据选择的辨识选项(单目标/多目标)更新算法选择和函数选项"""
-        # 获取当前选择的辨识类型
+        """根据选择的优化模式(单目标/多目标)更新算法选择和函数选项"""
+        # 获取当前选择的优化模式
         identification_type = self.identification_combo.currentData()
 
         # 先清空算法选择下拉框

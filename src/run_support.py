@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 Yuchen Wang
 # SPDX-License-Identifier: GPL-3.0-only
-"""Validation and MAT-file reading shared by the existing two pages."""
+"""Validation and MAT-file reading shared by the algorithm pages."""
 from i18n import tr
 import ast
 import math

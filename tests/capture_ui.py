@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 Yuchen Wang
 # SPDX-License-Identifier: GPL-3.0-only
-"""Capture unchanged forms and pixels; --source can point to a baseline backup."""
+"""Capture UI forms and screenshots for comparison."""
 import argparse
 import json
 import os

@@ -18,7 +18,7 @@ IDENTIFICATION_RANGES = {
 
 
 def default_parameters(algorithm, optimization=False):
-    """Return a fresh ordered mapping; values match the pre-cleanup forms."""
+    """Return a fresh ordered mapping of default form values."""
     if not algorithm:
         return {}
     if optimization and algorithm in MULTI:
